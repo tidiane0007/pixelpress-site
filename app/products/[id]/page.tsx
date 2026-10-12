@@ -1,10 +1,21 @@
+"use client";
+
 import { products } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { Suspense } from "react";
 
 export default function ProductDetailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductDetailPageContent />
+    </Suspense>
+  );
+}
+
+function ProductDetailPageContent() {
   const params = useParams();
   const router = useRouter();
   const { addToCart } = useCart();
@@ -15,11 +26,11 @@ export default function ProductDetailPage() {
 
   if (!product) {
     router.replace("/products");
-    return null; // In practice, you'd show a 404 page
+    return null;
   }
 
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity });
+    addToCart(product);
     // Reset quantity after adding
     setQuantity(1);
     // Optional: show success message
@@ -69,6 +80,7 @@ export default function ProductDetailPage() {
                   </div>
                 ))}
               </div>
+            </div>
 
             {/* Product Info */}
             <div className="space-y-6">
@@ -84,11 +96,11 @@ export default function ProductDetailPage() {
                   ${product.price.toFixed(2)}
                 </span>
                 {product.inStock ? (
-                  <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-dark:bg-green-900">
+                  <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded dark:bg-green-900">
                     In Stock
                   </span>
                 ) : (
-                  <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-dark:bg-red-900">
+                  <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded dark:bg-red-900">
                     Out of Stock
                   </span>
                 )}
@@ -102,7 +114,7 @@ export default function ProductDetailPage() {
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      disabled={((quantity < 1))}
+                      disabled={quantity <= 1}
                       className="w-8 h-8 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded flex items-center justify-center"
                     >
                       -
@@ -175,11 +187,11 @@ export default function ProductDetailPage() {
                         ${relatedProduct.price.toFixed(2)}
                       </span>
                       {relatedProduct.inStock ? (
-                        <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-dark:bg-green-900">
+                        <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded dark:bg-green-900">
                           In Stock
                         </span>
                       ) : (
-                        <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-dark:bg-red-900">
+                        <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded dark:bg-red-900">
                           Out of Stock
                         </span>
                       )}

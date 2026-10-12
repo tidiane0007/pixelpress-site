@@ -3,8 +3,17 @@
 import { products } from "@/lib/products";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductsPageContent />
+    </Suspense>
+  );
+}
+
+function ProductsPageContent() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
   const search = searchParams.get("search") || "";
@@ -42,7 +51,7 @@ export default function ProductsPage() {
                 placeholder="Search products..."
                 value={search}
                 onChange={(e) => {
-                  const url = new URL(window.location);
+                  const url = new URL(window.location.href);
                   url.searchParams.set("search", e.target.value);
                   window.history.pushState({}, "", url);
                 }}
