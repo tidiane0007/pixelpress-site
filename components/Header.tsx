@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import ShoppingCartIcon from "@radix-ui/react-icons/ShoppingCartIcon";
 
 export default function Header() {
   const { cartItems, totalItems } = useCart();
@@ -20,7 +19,9 @@ export default function Header() {
           </div>
           <div className="flex items-center space-x-4">
             <Link href="/cart" className="relative">
-              <ShoppingCartIcon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+              <span className="h-5 w-5 flex items-center justify-center text-gray-600 dark:text-gray-400">
+                𛒀
+              </span>
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-medium text-white">
                   {totalItems}

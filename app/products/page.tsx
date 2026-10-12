@@ -1,3 +1,5 @@
+"use client";
+
 import { products } from "@/lib/products";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

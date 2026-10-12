@@ -69,7 +69,6 @@ export default function ProductDetailPage() {
                   </div>
                 ))}
               </div>
-            }
 
             {/* Product Info */}
             <div className="space-y-6">
@@ -102,8 +101,8 @@ export default function ProductDetailPage() {
                   </label>
                   <div className="flex items-center space-x-2">
                     <button
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))]
-                      disabled={quantity <= 1}
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      disabled={((quantity < 1))}
                       className="w-8 h-8 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded flex items-center justify-center"
                     >
                       -
