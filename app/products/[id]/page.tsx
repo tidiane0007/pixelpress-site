@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Suspense } from "react";
+import { formatPrice } from "@/lib/site-config";
 
 export default function ProductDetailPage() {
   return (
@@ -42,11 +43,11 @@ function ProductDetailPageContent() {
       <div className="bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
-            Home
+            Accueil
           </Link>
           <span className="mx-2 text-sm text-gray-400 dark:text-gray-500">/</span>
           <Link href="/products" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
-            Products
+            Services
           </Link>
           <span className="mx-2 text-sm text-gray-400 dark:text-gray-500">/</span>
           <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -61,13 +62,7 @@ function ProductDetailPageContent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Product Image */}
             <div className="space-y-6">
-              <div className="aspect-w-4 aspect-h-3 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <div className="flex aspect-[4/3] flex-col justify-between rounded-lg bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-7 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-3xl font-black">{product.name}</span></div>
 
               {/* Thumbnails (optional) */}
               <div className="flex space-x-3">
@@ -93,15 +88,15 @@ function ProductDetailPageContent() {
 
               <div className="flex items-baseline space-x-4 mb-6">
                 <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                  ${product.price.toFixed(2)}
+                  Dès {formatPrice(product.price)}
                 </span>
                 {product.inStock ? (
                   <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded dark:bg-green-900">
-                    In Stock
+                    Sur devis
                   </span>
                 ) : (
                   <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded dark:bg-red-900">
-                    Out of Stock
+                    Indisponible
                   </span>
                 )}
               </div>
@@ -109,7 +104,7 @@ function ProductDetailPageContent() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                    Quantity:
+                      Quantité :
                   </label>
                   <div className="flex items-center space-x-2">
                     <button
@@ -135,16 +130,11 @@ function ProductDetailPageContent() {
                 disabled={!product.inStock}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
               >
-                {product.inStock ? "Add to Cart" : "Out of Stock"}
+                {product.inStock ? "Ajouter à ma demande" : "Indisponible"}
               </button>
 
               {product.inStock && (
-                <button
-                  type="button"
-                  className="mt-4 w-full bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium py-3 px-8 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
-                >
-                  Buy Now
-                </button>
+                <Link href="/devis" className="mt-4 block w-full rounded-lg bg-gray-200 px-8 py-3 text-center font-medium text-gray-900 transition-colors hover:bg-gray-300">Demander un devis</Link>
               )}
             </div>
           </div>
@@ -155,7 +145,7 @@ function ProductDetailPageContent() {
       <section className="py-12 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-            Related Products
+            Services associés
           </h2>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -168,13 +158,7 @@ function ProductDetailPageContent() {
                   href={`/products/${relatedProduct.id}`}
                   className="group block bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="aspect-w-4 aspect-h-3 bg-gray-100 dark:bg-gray-700">
-                    <img
-                      src={relatedProduct.image}
-                      alt={relatedProduct.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <div className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-xl font-black">{relatedProduct.category}</span></div>
                   <div className="p-4">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                       {relatedProduct.name}
@@ -184,15 +168,15 @@ function ProductDetailPageContent() {
                     </p>
                     <div className="flex justify-between items-center mt-4">
                       <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                        ${relatedProduct.price.toFixed(2)}
+                        Dès {formatPrice(relatedProduct.price)}
                       </span>
                       {relatedProduct.inStock ? (
                         <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded dark:bg-green-900">
-                          In Stock
+                          Sur devis
                         </span>
                       ) : (
                         <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded dark:bg-red-900">
-                          Out of Stock
+                          Indisponible
                         </span>
                       )}
                     </div>

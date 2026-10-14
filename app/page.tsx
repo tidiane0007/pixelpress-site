@@ -1,22 +1,22 @@
 import { products } from "@/lib/products";
 import Link from "next/link";
+import { siteConfig, formatPrice } from "@/lib/site-config";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="bg-slate-50">
       {/* Hero Section */}
-      <section className="py-16 bg-white dark:bg-gray-800">
+      <section className="bg-slate-950 py-20 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              Discover Amazing Products
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-cyan-300">Impression & personnalisation</p>
+            <h1 className="mb-6 text-4xl font-black tracking-tight sm:text-6xl">
+              Vos idées prennent vie avec PIXEL PRESS
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Shop our curated collection of high-quality products at great prices.
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-300">
+              Imprimerie numérique et personnalisation d&apos;objets au Sénégal, pour les entreprises, les événements et les particuliers.
             </p>
-            <Link href="/products" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200">
-              Browse All Products
-            </Link>
+            <div className="flex flex-wrap justify-center gap-3"><Link href="/devis" className="inline-block rounded-lg bg-cyan-400 px-6 py-3 font-bold text-slate-950 transition hover:bg-cyan-300">Demander un devis</Link><a href={siteConfig.phoneHref} className="inline-block rounded-lg border border-slate-600 px-6 py-3 font-bold transition hover:bg-slate-800">Appeler : {siteConfig.phoneDisplay}</a></div>
           </div>
         </div>
       </section>
@@ -25,7 +25,7 @@ export default function Home() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-            Featured Products
+            Nos services phares
           </h2>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -35,13 +35,7 @@ export default function Home() {
                 href={`/products/${product.id}`}
                 className="group block bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="aspect-w-4 aspect-h-3 bg-gray-100 dark:bg-gray-700">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <div className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-2xl font-black">{product.category}</span></div>
                 <div className="p-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                     {product.name}
@@ -50,16 +44,16 @@ export default function Home() {
                     {product.description}
                   </p>
                   <div className="flex justify-between items-center mt-4">
-                    <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                      ${product.price.toFixed(2)}
+                    <span className="text-xl font-bold text-slate-900">
+                      Dès {formatPrice(product.price)}
                     </span>
                     {product.inStock ? (
                       <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-dark:bg-green-900">
-                        In Stock
+                        Sur devis
                       </span>
                     ) : (
                       <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-dark:bg-red-900">
-                        Out of Stock
+                        Indisponible
                       </span>
                     )}
                   </div>
@@ -70,11 +64,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-12 bg-gray-50 dark:bg-gray-800">
+      <section className="bg-blue-700 py-12 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-            Shop by Category
+          <h2 className="mb-8 text-center text-3xl font-bold text-white">
+            Une solution pour chaque besoin
           </h2>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -82,13 +75,13 @@ export default function Home() {
               <Link
                 key={category}
                 href={`/products?category=${category}`}
-                className="block bg-white dark:bg-gray-800 rounded-lg p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="block rounded-lg bg-white p-6 text-center text-slate-900 transition-colors duration-200 hover:bg-cyan-50"
               >
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                   {category}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {products.filter(p => p.category === category).length} products
+                  {products.filter(p => p.category === category).length} prestation{products.filter(p => p.category === category).length > 1 ? "s" : ""}
                 </p>
               </Link>
             ))}

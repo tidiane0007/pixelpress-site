@@ -4,6 +4,7 @@ import { products } from "@/lib/products";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { formatPrice } from "@/lib/site-config";
 
 export default function ProductsPage() {
   return (
@@ -36,11 +37,11 @@ function ProductsPageContent() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="mb-4 sm:mb-0">
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                Products
+                Nos services
               </h1>
               {category && (
                 <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
-                  Viewing: {category}
+                  Catégorie : {category}
                 </p>
               )}
             </div>
@@ -48,7 +49,7 @@ function ProductsPageContent() {
             <div className="flex items-center space-x-3">
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Rechercher une prestation…"
                 value={search}
                 onChange={(e) => {
                   const url = new URL(window.location.href);
@@ -68,10 +69,10 @@ function ProductsPageContent() {
           {filteredProducts.length === 0 ? (
             <div className="text-center py-12">
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                No products found
+                Aucune prestation trouvée
               </h2>
               <p className="text-gray-500 dark:text-gray-400">
-                Try adjusting your search or filters.
+                Essayez de modifier votre recherche.
               </p>
             </div>
           ) : (
@@ -82,13 +83,7 @@ function ProductsPageContent() {
                   href={`/products/${product.id}`}
                   className="group block bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="aspect-w-4 aspect-h-3 bg-gray-100 dark:bg-gray-700">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <div className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-2xl font-black">{product.category}</span></div>
                   <div className="p-4">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                       {product.name}
@@ -98,15 +93,15 @@ function ProductsPageContent() {
                     </p>
                     <div className="flex justify-between items-center mt-4">
                       <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                        ${product.price.toFixed(2)}
+                        Dès {formatPrice(product.price)}
                       </span>
                       {product.inStock ? (
                         <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-dark:bg-green-900">
-                          In Stock
+                        Sur devis
                         </span>
                       ) : (
                         <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-dark:bg-red-900">
-                          Out of Stock
+                        Indisponible
                         </span>
                       )}
                     </div>
@@ -118,7 +113,7 @@ function ProductsPageContent() {
 
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Showing {filteredProducts.length} of {products.length} products
+              {filteredProducts.length} prestation{filteredProducts.length > 1 ? "s" : ""} affichée{filteredProducts.length > 1 ? "s" : ""} sur {products.length}
             </p>
           </div>
         </div>

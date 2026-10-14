@@ -1,34 +1,30 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 
 export default function Header() {
-  const { cartItems, totalItems } = useCart();
+  const { totalItems } = useCart();
 
   return (
-    <header className="bg-white dark:bg-black shadow-sm">
+    <header className="sticky top-0 z-40 bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-3">
-              <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                Ecommerce Store
-              </span>
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Link href="/cart" className="relative">
-              <span className="h-5 w-5 flex items-center justify-center text-gray-600 dark:text-gray-400">
-                𛒀
-              </span>
+        <div className="flex h-16 items-center justify-between gap-4">
+          <Link href="/" className="rounded bg-black p-1" aria-label="Accueil PIXEL PRESS"><Image src="/pixel-press-logo.png" alt="PIXEL PRESS" width={180} height={52} priority /></Link>
+          <nav className="flex items-center gap-3 text-sm font-semibold text-slate-700 sm:gap-5">
+            <Link href="/products" className="hover:text-blue-700">Services</Link>
+            <Link href="/contact" className="hidden hover:text-blue-700 sm:inline">Contact</Link>
+            <Link href="/cart" aria-label="Voir ma demande" className="relative rounded-lg p-2 hover:bg-slate-100">
+              <span className="text-lg" aria-hidden="true">🛒</span>
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-medium text-white">
                   {totalItems}
                 </span>
               )}
             </Link>
-          </div>
+            <Link href="/devis" className="rounded-lg bg-blue-700 px-3 py-2 text-white hover:bg-blue-800">Devis</Link>
+          </nav>
         </div>
       </div>
     </header>

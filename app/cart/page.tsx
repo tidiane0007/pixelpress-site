@@ -2,39 +2,29 @@
 
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
-import { useState } from "react";
+import { formatPrice } from "@/lib/site-config";
 
 export default function CartPage() {
   const { cartItems, totalItems, totalPrice, removeFromCart, updateQuantity, clearCart } = useCart();
-  const [coupon, setCoupon] = useState("");
 
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center py-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Your cart is empty
+            Votre demande est vide
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-6">
-            Add some products to continue shopping
+            Ajoutez des prestations pour préparer votre demande de devis.
           </p>
           <Link href="/" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200">
-            Continue Shopping
+            Découvrir nos services
           </Link>
         </div>
       </div>
     );
   }
 
-  const handleCouponApply = () => {
-    // In a real app, you'd validate the coupon with your backend
-    alert(`Coupon "${coupon}" applied!`);
-  };
-
-  const handleCheckout = () => {
-    // In a real app, you'd redirect to checkout or payment processing
-    alert("Proceeding to checkout...");
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -42,7 +32,7 @@ export default function CartPage() {
       <div className="bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
-            ← Continue Shopping
+            ← Continuer à découvrir nos services
           </Link>
         </div>
       </div>
@@ -57,13 +47,7 @@ export default function CartPage() {
                 className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-center p-4 space-x-4">
-                  <div className="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded bg-gradient-to-br from-blue-700 to-cyan-600 p-2 text-center text-xs font-black text-white">PIXEL<br />PRESS</div>
                   <div className="flex-1 space-y-2">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                       {item.name}
@@ -89,13 +73,13 @@ export default function CartPage() {
                         </button>
                       </div>
                       <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        Dès {formatPrice(item.price * item.quantity)}
                       </span>
                       <button
                         onClick={() => removeFromCart(item.id)}
                         className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-200"
                       >
-                        Remove
+                        Retirer
                       </button>
                     </div>
                   </div>
@@ -112,75 +96,49 @@ export default function CartPage() {
           <div className="space-y-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                Cart Summary
+                Récapitulatif de votre demande
               </h2>
               <button
                 onClick={clearCart}
                 className="text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-200"
               >
-                Clear Cart
+                Vider la demande
               </button>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
-                  Items ({totalItems})
+                  Prestations ({totalItems})
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Free shipping on orders over $50
+                  Les tarifs restent indicatifs jusqu&apos;à validation du devis.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
-                  Subtotal
+                  Estimation à partir de
                 </h3>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  ${totalPrice.toFixed(2)}
+                  {formatPrice(totalPrice)}
                 </p>
               </div>
 
-              <div className="sm:col-span-2 lg:col-span-1">
-                <div className="space-y-3">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                    Coupon code
-                  </label>
-                  <div className="flex space-x-2">
-                    <input
-                      type="text"
-                      value={coupon}
-                      onChange={(e) => setCoupon(e.target.value)}
-                      placeholder="Enter coupon code"
-                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-                    />
-                    <button
-                      onClick={handleCouponApply}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200"
-                    >
-                      Apply
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <div className="sm:col-span-2 lg:col-span-1"><p className="text-sm text-gray-500 dark:text-gray-400">Ajoutez vos formats, finitions et délais dans le formulaire de devis.</p></div>
             </div>
 
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                  Total
+                  Estimation totale à partir de
                 </span>
                 <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  ${totalPrice.toFixed(2)}
+                  {formatPrice(totalPrice)}
                 </span>
               </div>
 
-              <button
-                onClick={handleCheckout}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200"
-              >
-                Proceed to Checkout
-              </button>
+              <a href="/devis" className="block w-full bg-green-600 hover:bg-green-700 text-center font-bold py-3 px-8 rounded-lg transition-colors duration-200">Continuer vers le formulaire de devis</a>
             </div>
           </div>
         </div>
