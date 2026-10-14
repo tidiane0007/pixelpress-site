@@ -1,5 +1,4 @@
 import { products } from '@/lib/products';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata = {
@@ -21,13 +20,10 @@ export default function Gallery() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-shadow">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={400}
-                height={300}
-                className="object-cover w-full h-48"
-              />
+              <div className="aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white">
+                <span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span>
+                <span className="text-2xl font-black">{product.category}</span>
+              </div>
               <div className="p-4">
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">
                   {product.name}
