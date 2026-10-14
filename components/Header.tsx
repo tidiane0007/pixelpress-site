@@ -14,6 +14,7 @@ export default function Header() {
           <Link href="/" className="rounded bg-black p-1" aria-label="Accueil PIXEL PRESS"><Image src="/pixel-press-logo.png" alt="PIXEL PRESS" width={180} height={52} priority /></Link>
           <nav className="flex items-center gap-3 text-sm font-semibold text-slate-700 sm:gap-5">
             <Link href="/products" className="hover:text-blue-700">Services</Link>
+            <Link href="/gallery" className="hover:text-blue-700">Galerie</Link>
             <Link href="/contact" className="hidden hover:text-blue-700 sm:inline">Contact</Link>
             <Link href="/cart" aria-label="Voir ma demande" className="relative rounded-lg p-2 hover:bg-slate-100">
               <span className="text-lg" aria-hidden="true">🛒</span>

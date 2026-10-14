@@ -16,6 +16,7 @@ export default function Footer() {
           <p className="font-semibold text-white">Navigation</p>
           <nav className="mt-3 grid gap-2 text-sm text-slate-400">
             <Link href="/products" className="hover:text-white">Nos réalisations</Link>
+            <Link href="/gallery" className="hover:text-white">Galerie</Link>
             <Link href="/devis" className="hover:text-white">Demander un devis</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
           </nav>
