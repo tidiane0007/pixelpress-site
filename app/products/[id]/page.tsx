@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Suspense } from "react";
-import { formatPrice } from "@/lib/site-config";
+import ServiceIllustration from "@/components/ServiceIllustration";
 
 export default function ProductDetailPage() {
   return (
@@ -62,7 +62,7 @@ function ProductDetailPageContent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Product Image */}
             <div className="space-y-6">
-              <div className="flex aspect-[4/3] flex-col justify-between rounded-lg bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-7 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-3xl font-black">{product.name}</span></div>
+              <ServiceIllustration serviceId={product.id} label={product.name} className="rounded-lg" />
 
               {/* Thumbnails (optional) */}
               <div className="flex space-x-3">
@@ -86,20 +86,7 @@ function ProductDetailPageContent() {
                 {product.description}
               </p>
 
-              <div className="flex items-baseline space-x-4 mb-6">
-                <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                  Dès {formatPrice(product.price)}
-                </span>
-                {product.inStock ? (
-                  <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded dark:bg-green-900">
-                    Sur devis
-                  </span>
-                ) : (
-                  <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded dark:bg-red-900">
-                    Indisponible
-                  </span>
-                )}
-              </div>
+              <p className="rounded-lg bg-cyan-50 px-4 py-3 font-bold text-cyan-900">Cette prestation est disponible sur devis.</p>
 
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
@@ -158,7 +145,7 @@ function ProductDetailPageContent() {
                   href={`/products/${relatedProduct.id}`}
                   className="group block bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-xl font-black">{relatedProduct.category}</span></div>
+                  <ServiceIllustration serviceId={relatedProduct.id} label={relatedProduct.name} />
                   <div className="p-4">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                       {relatedProduct.name}
@@ -166,20 +153,7 @@ function ProductDetailPageContent() {
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 line-clamp-2">
                       {relatedProduct.description}
                     </p>
-                    <div className="flex justify-between items-center mt-4">
-                      <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                        Dès {formatPrice(relatedProduct.price)}
-                      </span>
-                      {relatedProduct.inStock ? (
-                        <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded dark:bg-green-900">
-                          Sur devis
-                        </span>
-                      ) : (
-                        <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded dark:bg-red-900">
-                          Indisponible
-                        </span>
-                      )}
-                    </div>
+                    <p className="mt-4 text-sm font-bold text-cyan-700">Demander un devis →</p>
                   </div>
                 </Link>
               ))}

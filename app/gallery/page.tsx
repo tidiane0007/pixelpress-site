@@ -1,5 +1,6 @@
 import { products } from '@/lib/products';
 import Link from 'next/link';
+import ServiceIllustration from '@/components/ServiceIllustration';
 
 export const metadata = {
   title: 'Galerie - Pixel Press',
@@ -20,10 +21,7 @@ export default function Gallery() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white">
-                <span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span>
-                <span className="text-2xl font-black">{product.category}</span>
-              </div>
+              <ServiceIllustration serviceId={product.id} label={product.name} />
               <div className="p-4">
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">
                   {product.name}
@@ -37,7 +35,7 @@ export default function Gallery() {
         </div>
         <div className="mt-12 text-center">
           <Link href="/" className="text-blue-600 hover:underline">
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
         </div>
       </div>

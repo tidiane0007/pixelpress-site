@@ -1,6 +1,7 @@
 import { products } from "@/lib/products";
 import Link from "next/link";
-import { siteConfig, formatPrice } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
+import ServiceIllustration from "@/components/ServiceIllustration";
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
                 href={`/products/${product.id}`}
                 className="group block bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-blue-700 via-cyan-600 to-slate-950 p-5 text-white"><span className="text-sm font-bold tracking-[0.2em]">PIXEL PRESS</span><span className="text-2xl font-black">{product.category}</span></div>
+                <ServiceIllustration serviceId={product.id} label={product.name} />
                 <div className="p-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                     {product.name}
@@ -43,20 +44,7 @@ export default function Home() {
                   <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 line-clamp-2">
                     {product.description}
                   </p>
-                  <div className="flex justify-between items-center mt-4">
-                    <span className="text-xl font-bold text-slate-900">
-                      Dès {formatPrice(product.price)}
-                    </span>
-                    {product.inStock ? (
-                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-dark:bg-green-900">
-                        Sur devis
-                      </span>
-                    ) : (
-                      <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-dark:bg-red-900">
-                        Indisponible
-                      </span>
-                    )}
-                  </div>
+                  <p className="mt-4 text-sm font-bold text-cyan-700">Demander un devis →</p>
                 </div>
               </Link>
             ))}
