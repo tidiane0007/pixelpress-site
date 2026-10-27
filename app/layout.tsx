@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
@@ -18,11 +19,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: { default: "PIXEL PRESS | Imprimerie numérique au Sénégal", template: "%s | PIXEL PRESS" },
   description: siteConfig.description,
   keywords: ["imprimerie numérique Sénégal", "personnalisation d'objets", "impression", "Dakar", "PIXEL PRESS"],
-  openGraph: { title: "PIXEL PRESS", description: siteConfig.description, locale: siteConfig.locale, type: "website" },
-  alternates: { canonical: "/" },
+  openGraph: {
+    title: "PIXEL PRESS",
+    description: siteConfig.description,
+    siteName: "PIXEL PRESS",
+    locale: siteConfig.locale,
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PIXEL PRESS",
+    description: siteConfig.description,
+  },
+};
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "PrintShop",
+  "@id": `${siteConfig.url}/#organisation`,
+  name: siteConfig.name,
+  url: siteConfig.url,
+  telephone: siteConfig.phoneDisplay,
+  email: siteConfig.email,
+  description: siteConfig.description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Dakar",
+    addressCountry: siteConfig.country,
+  },
+  areaServed: { "@type": "Country", name: "Sénégal" },
+  sameAs: [siteConfig.whatsappUrl],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,11 +63,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
+        />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-          <WhatsAppButton />
+          <Suspense fallback={null}>
+            <WhatsAppButton />
+          </Suspense>
         </CartProvider>
       </body>
     </html>

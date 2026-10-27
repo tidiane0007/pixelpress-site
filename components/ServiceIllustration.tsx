@@ -1,39 +1,33 @@
 import Image from "next/image";
+import { categoryName, type Product } from "@/lib/products";
 
 type ServiceIllustrationProps = {
-  serviceId: string;
-  label: string;
+  product: Product;
   className?: string;
+  sizes?: string;
+  priority?: boolean;
 };
 
-const photoByService: Record<string, string> = {
-  "1": "https://images.unsplash.com/photo-1773525911808-8a2cfd11cbc4?auto=format&fit=crop&q=85&w=1200",
-  "2": "https://images.unsplash.com/photo-1773525911808-8a2cfd11cbc4?auto=format&fit=crop&q=85&w=1200",
-  "3": "https://images.unsplash.com/photo-1579283268886-824b0d80166a?auto=format&fit=crop&q=85&w=1200",
-  "4": "https://images.unsplash.com/photo-1623305463957-df17547327cb?auto=format&fit=crop&q=85&w=1200",
-  "5": "https://images.unsplash.com/photo-1770017863955-56a1501a3c93?auto=format&fit=crop&q=85&w=1200",
-  "6": "https://images.unsplash.com/photo-1770017863955-56a1501a3c93?auto=format&fit=crop&q=85&w=1200",
-};
-
-const categoryByService: Record<string, string> = {
-  "1": "Impression textile",
-  "2": "Flyers & dépliants",
-  "3": "Mugs personnalisés",
-  "4": "Cartes de visite",
-  "5": "Grand format",
-  "6": "Bâches & affiches",
-};
-
-export default function ServiceIllustration({ serviceId, label, className = "" }: ServiceIllustrationProps) {
-  const image = photoByService[serviceId] ?? photoByService["6"];
-  const category = categoryByService[serviceId] ?? "Impression numérique";
-
+export default function ServiceIllustration({
+  product,
+  className = "",
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  priority = false,
+}: ServiceIllustrationProps) {
   return (
-  <div className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-slate-950 ${className}`} role="img" aria-label={`Illustration : ${label}`}>
-    <Image src={image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
-    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/15 to-slate-950/20" />
-    <span className="absolute left-4 top-4 rounded-full border border-white/30 bg-slate-950/60 px-3 py-1 text-[10px] font-black tracking-[0.18em] text-white backdrop-blur">PIXEL PRESS</span>
-    <span className="absolute bottom-4 left-4 right-4 text-lg font-black text-white drop-shadow-sm">{category}</span>
-  </div>
+    <div className={`relative aspect-[4/3] overflow-hidden bg-ink-100 ${className}`}>
+      <Image
+        src={product.image}
+        alt={product.imageAlt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950/75 via-ink-950/10 to-transparent" />
+      <span className="absolute left-3 top-3 rounded-full bg-ink-950/70 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white backdrop-blur">
+        {categoryName(product.category)}
+      </span>
+    </div>
   );
 }
