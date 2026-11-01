@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -8,10 +8,12 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import {
   categories,
+  categoryMatchesSearch,
   categoryName,
   defaultSelections,
   formatPrice,
   getCategory,
+  matchesSearch,
   products,
   type Product,
 } from "@/lib/products";
@@ -50,47 +52,36 @@ type Sort = (typeof SORTS)[number]["value"];
 export default function ProductBrowser() {
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("category");
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const urlSearch = searchParams.get("search") ?? "";
+  // L'URL reste la source de vérité : les liens « Recherches populaires » du
+  // catalogue vide pointent /prestations?search=… sans remonter ce composant, donc
+  // repartir d'elle à chaque rendu suffit à les rendre actifs. La frappe s'y
+  // superpose tant qu'elle est née de la même URL.
+  const [typed, setTyped] = useState<{ url: string; value: string } | null>(null);
+  const search = typed && typed.url === urlSearch ? typed.value : urlSearch;
   const [sort, setSort] = useState<Sort>("recommandes");
   const [quickView, setQuickView] = useState<Product | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { showToast } = useToast();
-  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Debounced search for better UX (autocomplete feel)
-  const handleSearchChange = useCallback((value: string) => {
-    setSearch(value);
-    setShowSuggestions(value.trim().length > 0);
+  const handleSearchChange = useCallback(
+    (value: string) => {
+      setTyped({ url: urlSearch, value });
+      setShowSuggestions(value.trim().length > 0);
+    },
+    [urlSearch]
+  );
 
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
-    searchTimeoutRef.current = setTimeout(() => {
-      setDebouncedSearch(value.trim().toLowerCase());
-    }, 200);
-  }, []);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-    };
-  }, []);
+  // Le catalogue suit la frappe sans la bloquer : React rend d'abord le champ, puis
+  // la liste en arrière-plan. Inutile de différer artificiellement 200 ms.
+  const deferredSearch = useDeferredValue(search.trim());
 
   const results = useMemo(() => {
-    const query = debouncedSearch;
-    const list = products.filter((product) => {
-      const matchesCategory = !activeCategory || product.category === activeCategory;
-      const matchesSearch =
-        !query ||
-        product.name.toLowerCase().includes(query) ||
-        product.short.toLowerCase().includes(query) ||
-        categoryName(product.category).toLowerCase().includes(query);
-      return matchesCategory && matchesSearch;
-    });
+    const list = products.filter(
+      (product) =>
+        (!activeCategory || product.category === activeCategory) &&
+        matchesSearch(product, deferredSearch)
+    );
 
     switch (sort) {
       case "prix-croissant":
@@ -102,25 +93,21 @@ export default function ProductBrowser() {
       default:
         return [...list].sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false));
     }
-  }, [activeCategory, debouncedSearch, sort]);
+  }, [activeCategory, deferredSearch, sort]);
 
   const category = activeCategory ? getCategory(activeCategory) : undefined;
 
-  // Generate search suggestions based on products and categories
+  // Suggestions d'autocomplétion : mêmes règles que le filtre du catalogue, sinon le
+  // menu propose une prestation que la recherche ne retrouve pas juste après.
   const suggestions = useMemo(() => {
     if (!search.trim()) return [];
-    const query = search.trim().toLowerCase();
     const productMatches = products
-      .filter((p) =>
-        p.name.toLowerCase().includes(query) ||
-        p.short.toLowerCase().includes(query) ||
-        p.category.toLowerCase().includes(query)
-      )
+      .filter((p) => matchesSearch(p, search))
       .slice(0, 5)
       .map((p) => ({ type: "product" as const, label: p.name, href: `/prestations/${p.id}` }));
 
     const categoryMatches = categories
-      .filter((c) => c.name.toLowerCase().includes(query))
+      .filter((c) => categoryMatchesSearch(c, search))
       .slice(0, 3)
       .map((c) => ({ type: "category" as const, label: c.name, href: `/prestations?category=${c.slug}` }));
 

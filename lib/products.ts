@@ -383,6 +383,94 @@ export const getRelated = (product: Product, limit = 4) =>
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, limit);
 
+/** Un client tape « tshirt », « bache » ou « tee-shirt » : le catalogue écrit
+    « T-shirts personnalisés » et « Bâches et affiches ». Plier les accents puis
+    retirer tirets, espaces et apostrophes couvre les deux premiers cas ; le
+    troisième demande de couper la requête sur les tirets, sinon « teeshirt » ne
+    ressemble à rien de connu. */
+export const normalizeSearch = (value: string) =>
+  value
+    .normalize("NFD")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
+
+export const normalizeWords = (rawQuery: string) =>
+  rawQuery
+    .split(/[\s-]+/)
+    .map(normalizeSearch)
+    .filter(Boolean);
+
+/** Termes que les clients emploient et que le catalogue n'écrit nulle part. Une
+    seule table ici plutôt qu'un champ éparpillé sur douze produits : elle ne sert
+    qu'à élargir la requête, jamais à modifier un intitulé affiché. */
+const searchAliases: Record<string, string[]> = {
+  maillot: ["tshirt"],
+  polo: ["tshirt"],
+  tee: ["tshirt"],
+  teeshirt: ["tshirt"],
+  shirt: ["tshirt"],
+  business: ["visite"],
+  card: ["carte"],
+  tract: ["flyer"],
+  banderole: ["bache"],
+  tasse: ["mug"],
+  chope: ["mug"],
+  cabas: ["tote"],
+  sac: ["tote"],
+  agenda: ["carnet"],
+  kakemono: ["rollup"],
+  enrouleur: ["rollup"],
+  bob: ["casquette"],
+};
+
+/** Le pluriel se range derrière le singulier : « maillots » doit retomber sur
+    l'alias de « maillot » sans le rédiger deux fois. */
+const singular = (word: string) =>
+  word.length > 3 && word.endsWith("s") ? word.slice(0, -1) : word;
+
+const wordMatches = (text: string, word: string) => {
+  const forms = [word, singular(word)];
+  return forms.some((form) =>
+    [form, ...(searchAliases[form] ?? [])].some((candidate) => text.includes(candidate))
+  );
+};
+
+// Tout ce qu'un visiteur est censé pouvoir retrouver : l'identifiant de l'URL
+// (« dibond », « rollup »), le texte commercial et les valeurs d'options et de
+// fiches techniques (« vinyle », « vitrine », « sublimation »).
+const searchHaystack = (product: Product) =>
+  normalizeSearch(
+    [
+      product.id,
+      product.name,
+      product.short,
+      product.description,
+      categoryName(product.category),
+      ...product.options.flatMap((option) => [option.label, ...option.values]),
+      ...product.specs.flatMap((spec) => [spec.label, spec.value]),
+    ].join(" ")
+  );
+
+/** Comparaison mot à mot : « cartes de visite » doit trouver « Cartes de visite »
+    même si le visiteur ajoute un mot ou change l'ordre. Une requête vide ne filtre rien. */
+export const matchesSearch = (product: Product, rawQuery: string) => {
+  const words = normalizeWords(rawQuery);
+  if (!words.length) return true;
+  const text = searchHaystack(product);
+  return words.every((word) => wordMatches(text, word));
+};
+
+/** Même logique pour les catégories suggérées : « grand format » doit trouver la
+    catégorie dont le nom s'écrit « Grand format ». */
+export const categoryMatchesSearch = (category: Category, rawQuery: string) => {
+  const words = normalizeWords(rawQuery);
+  if (!words.length) return true;
+  const text = normalizeSearch(
+    [category.slug, category.name, category.tagline, category.description].join(" ")
+  );
+  return words.every((word) => wordMatches(text, word));
+};
+
 export const formatPrice = (amount: number) =>
   `${new Intl.NumberFormat("fr-FR").format(amount)} FCFA`;
 
