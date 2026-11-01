@@ -429,4 +429,4 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
       </div>
     </form>
   );
-};
+}
