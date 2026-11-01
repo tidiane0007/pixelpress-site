@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rubik, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { ToastProvider } from "@/context/ToastContext";
@@ -13,19 +13,20 @@ import { siteConfig } from "@/lib/site-config";
 // Le root layout ne reçoit que children : LayoutProps<"/"> est le type généré par
 // Next. Redéclarer LayoutProps localement masque ce type et casse le type-check du build.
 
-// Preload fonts for better CLS - using variable fonts via next/font
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Rubik (titres) et Nunito Sans (corps) passent par next/font : les fichiers sont
+// auto-hébergés au build. Déclarés en @font-face sur fonts.gstatic.com, les deux
+// fichiers woff2 renvoyaient 404 et le site retombait sur la police système.
+// Ce sont des fonts variables : aucun weight à déclarer.
+const rubik = Rubik({
+  variable: "--font-rubik",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const nunitoSans = Nunito_Sans({
+  variable: "--font-nunito",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
 });
 
 // Preconnect to external domains for faster resource loading
@@ -77,15 +78,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${rubik.variable} ${nunitoSans.variable} h-full antialiased`}
     >
       <head>
-        {/* Preconnect to external domains for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Les polices sont auto-hébergées par next/font : seul WhatsApp reste externe. */}
         <link rel="preconnect" href="https://wa.me" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
       </head>
       <body className="min-h-full flex flex-col">
