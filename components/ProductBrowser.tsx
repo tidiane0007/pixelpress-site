@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import { useToast } from "@/context/ToastContext";
 import {
   categories,
   categoryName,
@@ -15,6 +16,25 @@ import {
   type Product,
 } from "@/lib/products";
 import ServiceIllustration from "@/components/ServiceIllustration";
+
+// Skeleton loader for product cards
+function ProductCardSkeleton() {
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-ink-200 bg-white">
+      <div className="aspect-[4/3] w-full skeleton" aria-hidden="true" />
+      <div className="flex flex-1 flex-col p-5 space-y-3">
+        <div className="h-6 w-3/4 skeleton" aria-hidden="true" />
+        <div className="h-4 w-full skeleton" aria-hidden="true" />
+        <div className="h-4 w-1/2 skeleton" aria-hidden="true" />
+        <div className="h-4 w-1/3 skeleton" aria-hidden="true" />
+        <div className="mt-auto flex items-center gap-2 border-t border-ink-100 pt-4">
+          <div className="h-10 w-full skeleton" aria-hidden="true" />
+          <div className="h-10 w-full skeleton" aria-hidden="true" />
+        </div>
+      </div>
+    </article>
+  );
+}
 
 const SORTS = [
   { value: "recommandes", label: "Les plus demandés" },
@@ -31,11 +51,37 @@ export default function ProductBrowser() {
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("category");
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [sort, setSort] = useState<Sort>("recommandes");
   const [quickView, setQuickView] = useState<Product | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const { showToast } = useToast();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Debounced search for better UX (autocomplete feel)
+  const handleSearchChange = useCallback((value: string) => {
+    setSearch(value);
+    setShowSuggestions(value.trim().length > 0);
+
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    searchTimeoutRef.current = setTimeout(() => {
+      setDebouncedSearch(value.trim().toLowerCase());
+    }, 200);
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const results = useMemo(() => {
-    const query = search.trim().toLowerCase();
+    const query = debouncedSearch;
     const list = products.filter((product) => {
       const matchesCategory = !activeCategory || product.category === activeCategory;
       const matchesSearch =
@@ -56,9 +102,30 @@ export default function ProductBrowser() {
       default:
         return [...list].sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false));
     }
-  }, [activeCategory, search, sort]);
+  }, [activeCategory, debouncedSearch, sort]);
 
   const category = activeCategory ? getCategory(activeCategory) : undefined;
+
+  // Generate search suggestions based on products and categories
+  const suggestions = useMemo(() => {
+    if (!search.trim()) return [];
+    const query = search.trim().toLowerCase();
+    const productMatches = products
+      .filter((p) =>
+        p.name.toLowerCase().includes(query) ||
+        p.short.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query)
+      )
+      .slice(0, 5)
+      .map((p) => ({ type: "product" as const, label: p.name, href: `/prestations/${p.id}` }));
+
+    const categoryMatches = categories
+      .filter((c) => c.name.toLowerCase().includes(query))
+      .slice(0, 3)
+      .map((c) => ({ type: "category" as const, label: c.name, href: `/prestations?category=${c.slug}` }));
+
+    return [...productMatches, ...categoryMatches];
+  }, [search]);
 
   return (
     <>
@@ -109,15 +176,55 @@ export default function ProductBrowser() {
       <section className="bg-ink-50 py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <label className="flex-1 sm:max-w-sm">
+            <label className="flex-1 sm:max-w-sm relative">
               <span className="sr-only">Rechercher une prestation</span>
               <input
                 type="search"
                 placeholder="Rechercher : flyer, broderie, roll-up…"
                 value={search}
-                onChange={(event) => setSearch(event.target.value)}
+                onChange={(event) => handleSearchChange(event.target.value)}
+                onFocus={() => setShowSuggestions(search.trim().length > 0)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                autoComplete="off"
+                aria-autocomplete="list"
+                aria-controls="search-suggestions"
+                aria-expanded={showSuggestions && suggestions.length > 0}
                 className="w-full rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm font-normal outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
               />
+              {showSuggestions && suggestions.length > 0 && (
+                <ul
+                  id="search-suggestions"
+                  role="listbox"
+                  className="absolute z-10 mt-1 w-full max-h-60 overflow-auto rounded-lg border border-ink-200 bg-white shadow-lg"
+                >
+                  {suggestions.map((suggestion, index) => (
+                    <li key={`${suggestion.type}-${suggestion.label}-${index}`} role="option">
+                      <Link
+                        href={suggestion.href}
+                        onClick={() => setShowSuggestions(false)}
+                        className="flex items-center gap-3 px-3 py-2 text-sm text-ink-700 hover:bg-primary-50"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 text-ink-400 shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden="true"
+                        >
+                          {suggestion.type === "product" ? (
+                            <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.2" strokeLinecap="round" strokeLinejoin="round" />
+                          ) : (
+                            <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" strokeLinejoin="round" />
+                          )}
+                        </svg>
+                        <span>{suggestion.label}</span>
+                        <span className="ml-auto text-xs text-ink-400 capitalize">{suggestion.type}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </label>
 
             <div className="flex items-center gap-3">
@@ -135,24 +242,54 @@ export default function ProductBrowser() {
                   ))}
                 </select>
               </label>
-              <p className="text-sm text-ink-500">
+              <p className="text-sm text-ink-500" aria-live="polite">
                 {results.length} sur {products.length}
               </p>
             </div>
           </div>
 
           {results.length === 0 ? (
-            <div className="mt-16 text-center">
+            <div className="mt-16 text-center" role="status" aria-live="polite">
+              <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-ink-100 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="h-8 w-8 text-ink-400" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+                </svg>
+              </div>
               <h2 className="text-2xl font-bold text-ink-900">Aucune prestation trouvée</h2>
-              <p className="mt-2 text-ink-600">
-                Nous imprimons aussi sur mesure : décrivez votre besoin sur la page devis.
+              <p className="mt-2 text-ink-600 max-w-md mx-auto">
+                Votre recherche "{search}" n'a donné aucun résultat. Essayez avec des termes plus généraux
+                ou parcourez nos catégories ci-dessous.
               </p>
-              <Link
-                href="/devis"
-                className="mt-6 inline-block rounded-lg bg-brand-500 px-6 py-3 font-bold text-white transition hover:bg-brand-600"
-              >
-                Demander un devis libre
-              </Link>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/prestations"
+                  className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-white transition hover:bg-brand-600"
+                >
+                  Voir tout le catalogue
+                </Link>
+                <Link
+                  href="/devis"
+                  className="rounded-lg border border-ink-200 bg-white px-6 py-3 font-bold text-ink-900 transition hover:border-brand-400 hover:text-brand-600"
+                >
+                  Demander un devis libre
+                </Link>
+              </div>
+              {/* Show popular search suggestions */}
+              <p className="mt-8 text-sm text-ink-500">
+                Recherches populaires&nbsp;:
+                {" "}
+                {["flyers", "t-shirts", "cartes de visite", "roll-up", "mugs", "bâches"]
+                  .map((term) => (
+                    <Link
+                      key={term}
+                      href={`/prestations?search=${encodeURIComponent(term)}`}
+                      className="mx-1 text-brand-600 hover:text-brand-700 underline underline-offset-2"
+                    >
+                      {term}
+                    </Link>
+                  ))}
+              </p>
             </div>
           ) : (
             <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

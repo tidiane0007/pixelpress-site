@@ -1,20 +1,48 @@
 @import "tailwindcss";
 
-/* Palette dérivée du logo : cyan #20c0e0 et vert #40a060. Un seul thème clair
-   assumé — l'inversion automatique en `prefers-color-scheme` laissait la moitié
-   des composants en couleurs fixes et produisait des fonds illisibles. */
+/* E-commerce optimized palette: Success green (#059669) + Urgency orange (#EA580C)
+   with light green background (#ECFDF5) for conversion-focused UI.
+   Typography: Rubik (headings) + Nunito Sans (body) — clean, readable, conversion-optimized. */
 @theme {
-  --color-brand-50: #ecfeff;
-  --color-brand-100: #cffafe;
-  --color-brand-200: #a5f3fc;
-  --color-brand-300: #67e8f9;
-  --color-brand-400: #20c0e0;
-  --color-brand-500: #0891b2;
-  --color-brand-600: #0e7490;
-  --color-brand-700: #155e75;
-  --color-leaf-400: #40c060;
-  --color-leaf-500: #40a060;
-  --color-leaf-600: #2f7d4a;
+  /* E-commerce palette from UI/UX Pro Max recommendations */
+  --color-primary-50: #ecfdf5;
+  --color-primary-100: #d1fae5;
+  --color-primary-200: #a7f3d0;
+  --color-primary-300: #6ee7b7;
+  --color-primary-400: #34d399;
+  --color-primary-500: #10b981;
+  --color-primary-600: #059669;
+  --color-primary-700: #047857;
+  --color-primary-800: #065f46;
+  --color-primary-900: #064e3b;
+  --color-primary-950: #022c22;
+
+  --color-accent-50: #fff7ed;
+  --color-accent-100: #ffedd5;
+  --color-accent-200: #fed7aa;
+  --color-accent-300: #fdba74;
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
+  --color-accent-800: #9a340c;
+  --color-accent-900: #7c2d12;
+  --color-accent-950: #431407;
+
+  /* Semantic aliases for easier migration */
+  --color-brand-50: var(--color-primary-50);
+  --color-brand-100: var(--color-primary-100);
+  --color-brand-200: var(--color-primary-200);
+  --color-brand-300: var(--color-primary-300);
+  --color-brand-400: var(--color-primary-400);
+  --color-brand-500: var(--color-primary-500);
+  --color-brand-600: var(--color-primary-600);
+  --color-brand-700: var(--color-primary-700);
+
+  --color-leaf-400: var(--color-accent-400);
+  --color-leaf-500: var(--color-accent-500);
+  --color-leaf-600: var(--color-accent-600);
+
   --color-ink-50: #f8fafc;
   --color-ink-100: #f1f5f9;
   --color-ink-200: #e2e8f0;
@@ -27,32 +55,209 @@
   --color-ink-900: #0f172a;
   --color-ink-950: #020617;
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* Typography: Rubik for headings, Nunito Sans for body */
+  --font-heading: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  :root {
+    --font-heading: "Rubik", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Preload fonts for better CLS */
+  @font-face {
+    font-family: "Rubik";
+    font-display: swap;
+    src: url("https://fonts.gstatic.com/s/rubik/v28/iJWZBXyIfDnIV7nBrXw.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: "Nunito Sans";
+    font-display: swap;
+    src: url("https://fonts.gstatic.com/s/nunitosans/v11/pe03MImSLYBIv1o4X1M8cc9yB9Q.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-primary-50);
   color: var(--color-ink-900);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 ::selection {
-  background: var(--color-brand-400);
-  color: var(--color-ink-950);
+  background: var(--color-primary-500);
+  color: #ffffff;
 }
 
-/* Le <dialog> natif sert d'aperçu rapide au catalogue. Ses styles par défaut du
-   navigateur (bordure, padding, taille intrinsèque) sont remplacés, le fond
-   d'obscurcissement reste géré ici car Tailwind n'expose pas ::backdrop. */
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-primary-600);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  z-index: 100;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-ink-200) 25%, var(--color-ink-100) 50%, var(--color-ink-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.375rem;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Toast notifications */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border: 1px solid var(--color-ink-200);
+  animation: slideIn 0.3s ease-out;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+.toast.success {
+  border-left: 4px solid var(--color-primary-500);
+}
+
+.toast.error {
+  border-left: 4px solid var(--color-destructive);
+}
+
+.toast.info {
+  border-left: 4px solid var(--color-primary-500);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dialog/Modal improvements */
 dialog {
   margin: auto;
   padding: 0;
   border: 0;
   background: transparent;
   color: inherit;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 
 dialog::backdrop {
   background: rgb(2 6 23 / 0.65);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Error message styling */
+.error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.375rem;
+  color: #991b1b;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.error-message[role="alert"] {
+  animation: slideIn 0.2s ease-out;
+}
+
+/* Form field error state */
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-destructive);
+  box-shadow: 0 0 0 1px var(--color-destructive);
+}
+
+input[aria-invalid="true"]:focus,
+select[aria-invalid="true"]:focus,
+textarea[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgb(220 38 38 / 0.2);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }
