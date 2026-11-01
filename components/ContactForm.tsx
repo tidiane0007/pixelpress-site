@@ -181,7 +181,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
     return labels[field] || field;
   };
 
-  {if (status.type === "success") {
+  if (status.type === "success") {
     return (
       <div
         role="status"
@@ -429,4 +429,4 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
       </div>
     </form>
   );
-}
+};
