@@ -1,12 +1,19 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode, type ToastOptions } from "react";
+import { createContext, useContext, useRef, useState, type ReactNode } from "react";
+
+// "ToastOptions" n'est pas exporté par react : le contrat d'appel est défini ici.
+export interface ToastOptions {
+  message: string;
+  type?: "success" | "error" | "info";
+  duration?: number;
+}
 
 interface Toast {
   id: string;
   message: string;
   type: "success" | "error" | "info";
-  duration?: number;
+  duration: number;
 }
 
 interface ToastContextType {
@@ -19,9 +26,13 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  // Compteur dans un ref : Math.random() au render est une impureté, et un identifiant
+  // tiré au sort change d'une passe à l'autre, ce qui casse les clés des toasts.
+  const lastIdRef = useRef(0);
 
   const showToast = (options: ToastOptions) => {
-    const id = Math.random().toString(36).substring(2, 9);
+    lastIdRef.current += 1;
+    const id = `toast-${lastIdRef.current}`;
     const toast: Toast = {
       id,
       message: options.message,

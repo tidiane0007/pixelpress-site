@@ -258,7 +258,7 @@ export default function ProductBrowser() {
               </div>
               <h2 className="text-2xl font-bold text-ink-900">Aucune prestation trouvée</h2>
               <p className="mt-2 text-ink-600 max-w-md mx-auto">
-                Votre recherche "{search}" n'a donné aucun résultat. Essayez avec des termes plus généraux
+                Votre recherche « {search} » n’a donné aucun résultat. Essayez avec des termes plus généraux
                 ou parcourez nos catégories ci-dessous.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">

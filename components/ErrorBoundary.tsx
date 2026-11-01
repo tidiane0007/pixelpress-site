@@ -64,9 +64,9 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
             </svg>
           </div>
           <div className="space-y-2">
-            <h2 className="text-xl font-bold text-ink-900">Quelque chose s'est mal passé</h2>
+            <h2 className="text-xl font-bold text-ink-900">Quelque chose s’est mal passé</h2>
             <p className="text-ink-600 max-w-md">
-              Nous n'avons pas pu charger ce contenu. Veuillez réessayer ou nous contacter si le problème persiste.
+              Nous n’avons pas pu charger ce contenu. Veuillez réessayer ou nous contacter si le problème persiste.
             </p>
             {process.env.NODE_ENV === "development" && this.state.error && (
               <details className="text-left max-w-md mt-4 p-3 rounded bg-ink-50 text-xs text-ink-600">

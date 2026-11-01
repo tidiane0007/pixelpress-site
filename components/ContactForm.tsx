@@ -53,8 +53,8 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
   const errorSummaryRef = useRef<HTMLDivElement>(null);
 
   // Validate a single field
-  const validateField = useCallback((name: keyof typeof initialValues, value: string) => {
-    const error = validators[name]?.(value) || "";
+  const validateField = useCallback((name: keyof typeof validators, value: string) => {
+    const error = validators[name](value);
     setErrors((prev) => ({ ...prev, [name]: error }));
     return error;
   }, []);
@@ -63,7 +63,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
   const validateAll = useCallback((): FormErrors => {
     const newErrors: FormErrors = {} as FormErrors;
     let hasErrors = false;
-    (Object.keys(validators) as Array<keyof typeof initialValues>).forEach((key) => {
+    (Object.keys(validators) as Array<keyof typeof validators>).forEach((key) => {
       const error = validators[key](values[key]);
       if (error) {
         newErrors[key] = error;
@@ -78,7 +78,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
   const handleBlur = useCallback((event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     if (name in validators) {
-      validateField(name as keyof typeof initialValues, value);
+      validateField(name as keyof typeof validators, value);
       setTouched((prev) => ({ ...prev, [name]: true }));
     }
   }, [validateField]);
@@ -89,7 +89,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
     setValues((prev) => ({ ...prev, [name]: value }));
     // Clear error on input if field was touched
     if (touched[name]) {
-      validateField(name as keyof typeof initialValues, value);
+      validateField(name as keyof typeof validators, value);
     }
   }, [touched, validateField]);
 

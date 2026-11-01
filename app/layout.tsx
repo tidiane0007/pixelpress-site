@@ -10,11 +10,8 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { siteConfig } from "@/lib/site-config";
 
-interface LayoutProps {
-  children: React.ReactNode;
-  params: Promise<Record<string, string>>;
-  searchParams: Promise<Record<string, string>>;
-}
+// Le root layout ne reçoit que children : LayoutProps<"/"> est le type généré par
+// Next. Redéclarer LayoutProps localement masque ce type et casse le type-check du build.
 
 // Preload fonts for better CLS - using variable fonts via next/font
 const geistSans = Geist({
@@ -76,7 +73,7 @@ const localBusiness = {
   sameAs: [siteConfig.whatsappUrl],
 };
 
-export default function RootLayout({ children, params, searchParams }: LayoutProps) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
