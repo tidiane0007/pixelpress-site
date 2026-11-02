@@ -282,7 +282,7 @@ export default function ProductBrowser() {
             <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {results.map((product, index) => (
                 <li key={product.id}>
-                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm transition hover:shadow-md">
+                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-lg">
                     <Link href={`/prestations/${product.id}`} className="block">
                       <ServiceIllustration product={product} priority={index < 3} />
                     </Link>
@@ -296,11 +296,32 @@ export default function ProductBrowser() {
                         </Link>
                       </h2>
                       <p className="mt-1 text-sm leading-6 text-ink-600">{product.short}</p>
-                      <p className="mt-4 text-sm font-bold text-ink-900">
-                        dès {formatPrice(product.price)}
-                        <span className="ml-1 font-normal text-ink-500">{product.priceUnit}</span>
+                      <p className="mt-4 flex flex-wrap items-baseline gap-x-2">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-ink-500">
+                          dès
+                        </span>
+                        <span className="text-xl font-bold text-ink-900">
+                          {formatPrice(product.price)}
+                        </span>
+                        <span className="text-sm text-ink-500">{product.priceUnit}</span>
                       </p>
-                      <div className="mt-5 flex items-center gap-2 border-t border-ink-100 pt-4">
+                      {/* Le délai décide une commande : il était seulement sur la fiche,
+                          jamais dans le catalogue. */}
+                      <p className="mb-5 mt-3 flex items-start gap-2 text-sm text-ink-600">
+                        <svg
+                          viewBox="0 0 20 20"
+                          aria-hidden="true"
+                          className="mt-0.5 h-4 w-4 shrink-0 fill-none stroke-current stroke-[1.6] text-brand-600"
+                        >
+                          <circle cx="10" cy="10" r="7.5" />
+                          <path d="M10 6v4.5l3 1.8" strokeLinecap="round" />
+                        </svg>
+                        <span className="line-clamp-2">
+                          <span className="font-semibold text-ink-700">Délai&nbsp;:</span>{" "}
+                          {product.delay}
+                        </span>
+                      </p>
+                      <div className="mt-auto flex items-center gap-2 border-t border-ink-100 pt-4">
                         <Link
                           href={`/prestations/${product.id}`}
                           className="rounded-lg bg-ink-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-ink-800"
