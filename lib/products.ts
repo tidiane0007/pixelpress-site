@@ -81,7 +81,7 @@ export const products: Product[] = [
     price: 4500,
     priceUnit: "l'unité, à partir de 10 pièces",
     image: "/images/tshirt.jpg",
-    imageAlt: "Presse sérigraphique en train d'imprimer un textile",
+    imageAlt: "T-shirt blanc plié avec un visuel géométrique vert et orange",
     category: "textile",
     options: [
       { label: "Technique", values: ["Sérigraphie", "DTF", "Broderie"] },
@@ -106,7 +106,7 @@ export const products: Product[] = [
     price: 25000,
     priceUnit: "les 500 exemplaires A5",
     image: "/images/flyers-depliants.jpg",
-    imageAlt: "Pile de flyers quadri fraîchement imprimés",
+    imageAlt: "Trois flyers aux visuels géométriques vert et orange",
     category: "papier",
     options: [
       { label: "Format", values: ["A6", "A5", "A4", "Carré 21 × 21"] },
@@ -131,7 +131,7 @@ export const products: Product[] = [
     price: 15000,
     priceUnit: "les 500 exemplaires",
     image: "/images/cartes-de-visite.jpg",
-    imageAlt: "Deux piles de cartes de visite prêtes à imprimer",
+    imageAlt: "Pile de cartes de visite et une carte à motif vert et orange",
     category: "papier",
     options: [
       { label: "Papier", values: ["350 g classique", "Création texturé", "Noir profond"] },
@@ -156,7 +156,7 @@ export const products: Product[] = [
     price: 8000,
     priceUnit: "la planche de 20 pièces",
     image: "/images/stickers.jpg",
-    imageAlt: "Planche d'autocollants vinyle découpés à la forme",
+    imageAlt: "Planche d'autocollants découpés à motif géométrique vert et orange",
     category: "papier",
     options: [
       { label: "Usage", values: ["Intérieur", "Extérieur 3 ans", "Vitrine translucide"] },
@@ -180,7 +180,7 @@ export const products: Product[] = [
     price: 2500,
     priceUnit: "l'unité, à partir de 50 carnets",
     image: "/images/carnet.jpg",
-    imageAlt: "Pile de carnets à la couverture bleue et cyan",
+    imageAlt: "Deux carnets à couverture verte et motif orange",
     category: "papier",
     options: [
       { label: "Format", values: ["A6 de poche", "A5", "A4"] },
@@ -204,7 +204,7 @@ export const products: Product[] = [
     price: 3500,
     priceUnit: "l'unité, à partir de 12 mugs",
     image: "/images/mug.jpg",
-    imageAlt: "Mug personnalisé posé sur une table",
+    imageAlt: "Deux mugs blancs, l'un à intérieur vert, l'autre à intérieur orange",
     category: "objets",
     options: [
       { label: "Contenance", values: ["11 cl espresso", "33 cl standard", "50 cl latto"] },
@@ -229,7 +229,7 @@ export const products: Product[] = [
     price: 4000,
     priceUnit: "l'unité, à partir de 20 gourdes",
     image: "/images/gourde.jpg",
-    imageAlt: "Gourde inox brossé avec un motif cyan et bleu",
+    imageAlt: "Quatre gourdes en aluminium, blanc, vert, orange et gris",
     category: "objets",
     options: [
       { label: "Modèle", values: ["Simple paroi", "Double paroi isotherme", "Thermos"] },
@@ -253,7 +253,7 @@ export const products: Product[] = [
     price: 3000,
     priceUnit: "l'unité, à partir de 15 pièces",
     image: "/images/casquette.jpg",
-    imageAlt: "Casquette bleu marine avec un motif brodé cyan",
+    imageAlt: "Casquette verte avec un motif brodé orange",
     category: "textile",
     options: [
       { label: "Modèle", values: ["6 pans", "Panneau unique", "Bonnet"] },
@@ -277,7 +277,7 @@ export const products: Product[] = [
     price: 3500,
     priceUnit: "l'unité, à partir de 25 pièces",
     image: "/images/tote-bag.jpg",
-    imageAlt: "Tote bag en toile de coton avec un imprimé bleu et cyan",
+    imageAlt: "Tote bag en toile naturelle à motif géométrique vert et orange",
     category: "textile",
     options: [
       { label: "Toile", values: ["Naturelle 140 g", "Renforcée 280 g"] },
@@ -301,7 +301,7 @@ export const products: Product[] = [
     price: 45000,
     priceUnit: "le kit complet 85 × 200 cm",
     image: "/images/roll-up.jpg",
-    imageAlt: "Roll-up déployé dans un stand d'exposition",
+    imageAlt: "Roll-up déroulé à visuel géométrique vert et orange",
     category: "grand-format",
     options: [
       { label: "Largeur", values: ["85 cm", "100 cm", "Double 200 cm"] },
@@ -326,7 +326,7 @@ export const products: Product[] = [
     price: 30000,
     priceUnit: "les 5 m² posés",
     image: "/images/baches-affiches.jpg",
-    imageAlt: "Traceur grand format en cours d'impression d'une affiche",
+    imageAlt: "Affiche grand format à motif géométrique vert et orange",
     category: "grand-format",
     options: [
       { label: "Support", values: ["Bâche 510 g", "Bâche mesh", "Intissé", "Affiche vinyle"] },
@@ -350,7 +350,7 @@ export const products: Product[] = [
     price: 55000,
     priceUnit: "le panneau 100 × 70 cm posé",
     image: "/images/panneau-dibond.jpg",
-    imageAlt: "Panneau rigide fixé en façade par des entretoises",
+    imageAlt: "Deux panneaux rigides imprimés, vert et orange",
     category: "grand-format",
     options: [
       { label: "Épaisseur", values: ["3 mm intérieur", "4 mm extérieur"] },

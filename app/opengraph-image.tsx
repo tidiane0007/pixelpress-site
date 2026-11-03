@@ -1,11 +1,15 @@
+/* eslint-disable @next/next/no-img-element -- Satori n’a pas accès à next/image */
 import { ImageResponse } from "next/og";
 import { OgLine } from "@/lib/OgLine";
+import { logoDataUrl } from "@/lib/og-logo";
 import { siteConfig } from "@/lib/site-config";
 
 export const alt =
   "PIXEL PRESS — imprimerie numérique et personnalisation d'objets au Sénégal";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const logo = logoDataUrl();
 
 export default function Image() {
   return new ImageResponse(
@@ -24,18 +28,17 @@ export default function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 14,
-              background: "linear-gradient(135deg, #0891b2, #2563eb)",
-              display: "flex",
-            }}
-          />
-          <div style={{ fontSize: 34, letterSpacing: 3, display: "block" }}>
-            PIXEL PRESS
-          </div>
+          {logo ? (
+            <img
+              src={logo}
+              alt=""
+              style={{ width: 242, height: 72, objectFit: "contain" }}
+            />
+          ) : (
+            <div style={{ fontSize: 34, letterSpacing: 3, display: "block" }}>
+              PIXEL PRESS
+            </div>
+          )}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
@@ -73,7 +76,7 @@ export default function Image() {
             borderTop: "3px solid #1e293b",
             paddingTop: 28,
             fontSize: 28,
-            color: "#67e8f9",
+            color: "#fdba74",
           }}
         >
           <div style={{ display: "block" }}>{siteConfig.phoneDisplay}</div>
