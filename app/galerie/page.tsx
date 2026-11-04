@@ -5,7 +5,7 @@ import GalleryGrid from "@/components/GalleryGrid";
 export const metadata: Metadata = {
   title: "Nos techniques en images",
   description:
-    "Sérigraphie, DTF, broderie, quadri numérique, découpe à la forme, sublimation et grand format : ce que l’atelier PIXEL PRESS de Dakar sait produire, en images.",
+    "Sérigraphie, DTF, broderie, quadri numérique, découpe à la forme, sublimation, gravure sur verre et grand format : ce que l’atelier PIXEL PRESS de Dakar sait produire, en images.",
   alternates: { canonical: "/galerie" },
 };
 

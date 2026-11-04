@@ -7,6 +7,7 @@ import {
   countByCategory,
   featuredProducts,
   formatPrice,
+  getProduct,
   products,
 } from "@/lib/products";
 import { siteConfig } from "@/lib/site-config";
@@ -42,45 +43,24 @@ const etapes = [
   },
 ];
 
+/** L'accueil montre les visuels du catalogue : image et description sont reprises de
+    la fiche, sinon l'alt finit par décrire un geste que l'image ne montre plus. */
+const visuel = (id: string) => {
+  const product = getProduct(id);
+  return { image: product?.image ?? "", alt: product?.imageAlt ?? product?.name ?? "" };
+};
+
 const vitrine = [
-  {
-    image: "/images/flyers-depliants.jpg",
-    alt: "Pile de flyers quadri fraîchement imprimés",
-    label: "Papier",
-  },
-  {
-    image: "/images/tshirt.jpg",
-    alt: "Presse sérigraphique en train d’imprimer un textile",
-    label: "Textile",
-  },
-  {
-    image: "/images/roll-up.jpg",
-    alt: "Roll-up installé sur un stand d’exposition",
-    label: "Grand format",
-  },
-  {
-    image: "/images/mug.jpg",
-    alt: "Mug blanc en céramique avant sublimation",
-    label: "Objets",
-  },
+  { ...visuel("flyers-depliants"), label: "Papier" },
+  { ...visuel("tshirts-personnalises"), label: "Textile" },
+  { ...visuel("roll-up"), label: "Grand format" },
+  { ...visuel("mugs-personnalises"), label: "Objets" },
 ];
 
 const atelier = [
-  {
-    image: "/images/stickers.jpg",
-    alt: "Planche d’autocollants découpés à la forme",
-    title: "Découpe à la forme",
-  },
-  {
-    image: "/images/casquette.jpg",
-    alt: "Casquette en toile posée sur l’atelier de broderie",
-    title: "Broderie de logo",
-  },
-  {
-    image: "/images/panneau-dibond.jpg",
-    alt: "Panneau composite fixé en façade par des entretoises",
-    title: "Panneau rigide en façade",
-  },
+  { ...visuel("autocollants"), title: "Découpe à la forme" },
+  { ...visuel("casquettes-brodees"), title: "Broderie de logo" },
+  { ...visuel("panneaux-dibond"), title: "Panneau rigide en façade" },
 ];
 
 export default function HomePage() {
@@ -96,8 +76,8 @@ export default function HomePage() {
               Vos idées prennent vie
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-8 text-ink-300">
-              Texte, papier, objets et grand format : douze prestations produites dans nos ateliers
-              de Dakar, du prototype unique à la série de cinquante mille exemplaires.
+              Texte, papier, objets et grand format : {products.length} prestations produites dans
+              nos ateliers de Dakar, du prototype unique à la série de cinquante mille exemplaires.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">

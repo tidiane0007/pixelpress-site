@@ -58,7 +58,7 @@ export const categories: Category[] = [
     name: "Objets personnalisés",
     tagline: "Le cadeau qui reste",
     description:
-      "Sublimation et gravure sur mug, gourde et accessoires de bureau : vos couleurs au quotidien.",
+      "Sublimation et gravure sur mug, gourde, trophée de verre, porte-clés et coque : vos couleurs au quotidien.",
     image: "/images/mug.jpg",
   },
   {
@@ -245,6 +245,107 @@ export const products: Product[] = [
     inStock: true,
   },
   {
+    id: "trophees-verre-graves",
+    name: "Trophées et plaques de verre",
+    short: "Verre et cristal gravés, montés sur socle.",
+    description:
+      "Plaques de verre ou d'acrylique découpées à la forme — hexagone, écu, octogone, losange — aux bords polis, personnalisées par gravure laser ou impression couleur, puis montées sur socle cristal ou noir. Nous contrôlons l'épaisseur, l'équerrage et la lisibilité du texte gravé avant de lancer la série.",
+    price: 18000,
+    priceUnit: "la pièce, à partir de 10 trophées",
+    image: "/images/trophee-verre.jpg",
+    imageAlt: "Trois trophées de verre gravés de motifs verts et orange, montés sur socle cristal",
+    category: "objets",
+    options: [
+      { label: "Forme", values: ["Hexagone", "Écu", "Octogone", "Losange", "Forme libre"] },
+      { label: "Épaisseur", values: ["Verre 10 mm", "Verre 15 mm", "Acrylique 8 mm"] },
+      { label: "Marquage", values: ["Gravure laser", "Impression couleur", "Décalque doré"] },
+      { label: "Socle", values: ["Cristal", "Noir laqué", "Sans socle"] },
+    ],
+    specs: [
+      { label: "Hauteur", value: "Jusqu'à 25 cm, socle inclus" },
+      { label: "Série", value: "Dès 5 pièces identiques, prix dégressif" },
+      { label: "Finition", value: "Bords polis, angles ébavurés" },
+    ],
+    delay: "4 à 7 jours après validation du bon à tirer",
+    featured: true,
+    inStock: true,
+  },
+  {
+    id: "porte-cles-personnalises",
+    name: "Porte-clés personnalisés",
+    short: "Métal ou acrylique, gravés ou imprimés, sous étui.",
+    description:
+      "Porte-clés en métal (rond, cœur, rectangle, médiator) ou en acrylique, marqués par sublimation, gravure laser ou impression directe. Chacun peut porter un nom, un numéro de téléphone ou un logo, et se livre dans son étui cadeau pour les remises de prix et les opérations commerciales.",
+    price: 1200,
+    priceUnit: "l'unité, à partir de 50 pièces",
+    image: "/images/porte-cles.jpg",
+    imageAlt: "Cinq porte-clés en métal à motifs verts et orange posés près d'un étui noir",
+    category: "objets",
+    options: [
+      { label: "Forme", values: ["Rond", "Cœur", "Rectangle", "Médiateur", "Forme libre"] },
+      { label: "Matière", values: ["Métal sublimable", "Acrylique", "Bois", "Inox gravé"] },
+      { label: "Marquage", values: ["Une face", "Deux faces", "Gravure laser"] },
+      { label: "Livraison", values: ["En vrac", "Étui cadeau"] },
+    ],
+    specs: [
+      { label: "Taille", value: "32 à 55 mm selon la forme" },
+      { label: "Personnalisation", value: "Nom, téléphone et logo sur la même face" },
+      { label: "Minimum", value: "50 pièces identiques" },
+    ],
+    delay: "3 à 5 jours",
+    inStock: true,
+  },
+  {
+    id: "coques-telephone",
+    name: "Coques de téléphone",
+    short: "Impression pleine surface, découpes contrôlées.",
+    description:
+      "Coques imprimées par sublimation : le visuel couvre toute la face et le marquage est noyé dans la résine, sans relief. Les découpes d'objectif, de boutons et de chargeur sont vérifiées sur le modèle annoncé avant tirage, pièce par pièce si la série mélange plusieurs téléphones.",
+    price: 3500,
+    priceUnit: "l'unité, à partir de 12 coques",
+    image: "/images/coque-telephone.jpg",
+    imageAlt: "Trois coques de téléphone blanches imprimées de motifs verts et orange",
+    category: "objets",
+    options: [
+      { label: "Type", values: ["Rigide", "Souple", "Verre trempé"] },
+      { label: "Modèles", values: ["iPhone 11 → 16", "Samsung Galaxy", "Xiaomi et autres"] },
+      { label: "Bord", values: ["Blanc", "Noir", "Translucide"] },
+      { label: "Marquage", values: ["Une face", "Tour complet"] },
+    ],
+    specs: [
+      { label: "Découpes", value: "Contrôlées sur le modèle annoncé" },
+      { label: "Tenue", value: "Marquage noyé dans la résine, sans relief" },
+      { label: "Minimum", value: "12 coques, 1 pièce en échantillon" },
+    ],
+    delay: "2 à 4 jours",
+    inStock: true,
+  },
+  {
+    id: "eventails-personnalises",
+    name: "Éventails personnalisés",
+    short: "Le support des événements en plein air.",
+    description:
+      "Éventails à main imprimés sur carton ou plastique, montés sur tiges bois ou plastique, avec une large surface de marquage des deux côtés. Un objet utile sous la chaleur de Dakar, pensé pour les rencontres, les matchs et les lancements en extérieur.",
+    price: 900,
+    priceUnit: "l'unité, à partir de 100 éventails",
+    image: "/images/eventail.jpg",
+    imageAlt: "Trois éventails à main blancs imprimés de motifs verts et orange",
+    category: "objets",
+    options: [
+      { label: "Support", values: ["Carton 300 g", "Plastique", "Bois"] },
+      { label: "Taille", values: ["21 × 38 cm", "25 × 43 cm", "Format poche"] },
+      { label: "Marquage", values: ["Une face", "Deux faces"] },
+      { label: "Manche", values: ["Plastique", "Bois verni"] },
+    ],
+    specs: [
+      { label: "Surface", value: "Jusqu'à 21 × 25 cm de visuel" },
+      { label: "Minimum", value: "100 pièces" },
+      { label: "Finition", value: "Vernis anti-traces en option" },
+    ],
+    delay: "5 à 8 jours",
+    inStock: true,
+  },
+  {
     id: "casquettes-brodees",
     name: "Casquettes brodées",
     short: "Broderie filée, tenue impeccable en série.",
@@ -401,7 +502,7 @@ export const normalizeWords = (rawQuery: string) =>
     .filter(Boolean);
 
 /** Termes que les clients emploient et que le catalogue n'écrit nulle part. Une
-    seule table ici plutôt qu'un champ éparpillé sur douze produits : elle ne sert
+    seule table ici plutôt qu'un champ éparpillé sur tout le catalogue : elle ne sert
     qu'à élargir la requête, jamais à modifier un intitulé affiché. */
 const searchAliases: Record<string, string[]> = {
   maillot: ["tshirt"],
@@ -421,6 +522,15 @@ const searchAliases: Record<string, string[]> = {
   kakemono: ["rollup"],
   enrouleur: ["rollup"],
   bob: ["casquette"],
+  medaille: ["trophee"],
+  recompense: ["trophee"],
+  tropee: ["trophee"],
+  cristal: ["verre"],
+  keychain: ["portecles"],
+  trousseau: ["portecles"],
+  clef: ["portecles"],
+  housse: ["coque"],
+  etui: ["coque"],
 };
 
 /** Le pluriel se range derrière le singulier : « maillots » doit retomber sur

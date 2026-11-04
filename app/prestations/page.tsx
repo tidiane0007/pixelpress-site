@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Nos prestations d’impression",
   description:
-    "Flyers, cartes de visite, t-shirts, mugs, roll-up et bâches à Dakar : 12 prestations d’imprimerie numérique, leurs options, leurs délais et des tarifs de départ. Devis confirmé sous 24 h.",
+    "Flyers, t-shirts, mugs, trophées de verre, porte-clés, coques, roll-up et bâches à Dakar : 16 prestations d’imprimerie numérique avec options, délais et tarifs de départ. Devis sous 24 h.",
   alternates: { canonical: "/prestations" },
 };
 
