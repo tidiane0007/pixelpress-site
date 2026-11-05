@@ -62,15 +62,16 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
   // Validate all fields
   const validateAll = useCallback((): FormErrors => {
     const newErrors: FormErrors = {} as FormErrors;
-    let hasErrors = false;
     (Object.keys(validators) as Array<keyof typeof validators>).forEach((key) => {
       const error = validators[key](values[key]);
-      if (error) {
-        newErrors[key] = error;
-        hasErrors = true;
-      }
+      if (error) newErrors[key] = error;
     });
     setErrors(newErrors);
+    // Marquer tout touché : sans ça, un clic sur « Envoyer » sans avoir posé le
+    // curseur dans un champ affiche le résumé mais laisse aria-invalid faux et le
+    // message d'erreur masqué — un lecteur d'écran ne peut pas relier le champ à
+    // son défaut.
+    setTouched(Object.fromEntries((Object.keys(validators) as Array<keyof typeof validators>).map((k) => [k, true])));
     return newErrors;
   }, [values]);
 
