@@ -92,7 +92,7 @@ export default function AddToCartPanel({ product }: { product: Product }) {
           type="button"
           onClick={handleAdd}
           disabled={!product.inStock}
-          className="rounded-lg bg-leaf-500 px-6 py-3 font-bold text-white transition hover:bg-leaf-600 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-leaf-500 px-6 py-3 font-bold text-ink-950 transition hover:bg-leaf-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {product.inStock
             ? added

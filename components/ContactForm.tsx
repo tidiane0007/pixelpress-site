@@ -200,7 +200,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
             href={whatsAppHref}
             target="_blank"
             rel="noreferrer"
-            className="rounded-lg bg-primary-600 px-5 py-3 font-bold text-white transition hover:bg-primary-700"
+            className="rounded-lg bg-primary-600 px-5 py-3 font-bold text-ink-950 transition hover:bg-primary-700"
           >
             Suivre sur WhatsApp
           </a>
@@ -411,7 +411,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
         <button
           disabled={isSending}
           type="submit"
-          className="rounded-lg bg-brand-500 px-5 py-3 font-bold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-lg bg-brand-500 px-5 py-3 font-bold text-ink-950 transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSending
             ? "Envoi en cours…"
@@ -423,7 +423,7 @@ export default function ContactForm({ quote = false }: ContactFormProps) {
           href={whatsAppHref}
           target="_blank"
           rel="noreferrer"
-          className="rounded-lg bg-leaf-500 px-5 py-3 font-bold text-white transition hover:bg-leaf-600"
+          className="rounded-lg bg-leaf-500 px-5 py-3 font-bold text-ink-950 transition hover:bg-leaf-600"
         >
           Envoyer sur WhatsApp
         </a>

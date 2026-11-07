@@ -73,7 +73,7 @@ export default function ConseilsPage() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/devis"
-              className="rounded-lg bg-brand-500 px-5 py-3 font-bold text-white transition hover:bg-brand-600"
+              className="rounded-lg bg-brand-500 px-5 py-3 font-bold text-ink-950 transition hover:bg-brand-600"
             >
               Demander un devis
             </Link>

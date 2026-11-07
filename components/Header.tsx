@@ -230,7 +230,7 @@ export default function Header() {
                 <circle cx="18" cy="20" r="1.4" />
               </svg>
               {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-leaf-500 px-1 text-xs font-bold text-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-leaf-500 px-1 text-xs font-bold text-ink-950">
                   {totalItems}
                 </span>
               )}
@@ -238,7 +238,7 @@ export default function Header() {
 
             <Link
               href="/devis"
-              className="hidden rounded-lg bg-brand-500 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-brand-600 sm:inline-block"
+              className="hidden rounded-lg bg-brand-500 px-4 py-2 text-sm font-bold text-ink-950 shadow-sm transition hover:bg-brand-600 sm:inline-block"
             >
               Demander un devis
             </Link>
@@ -302,7 +302,7 @@ export default function Header() {
             <Link
               href="/devis"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 block rounded-lg bg-brand-500 px-4 py-3 text-center text-sm font-bold text-white"
+              className="mt-4 block rounded-lg bg-brand-500 px-4 py-3 text-center text-sm font-bold text-ink-950"
             >
               Demander un devis
             </Link>

@@ -239,7 +239,7 @@ export default function HomePage() {
           <ol className="mt-8 grid gap-5 lg:grid-cols-4">
             {etapes.map((etape, index) => (
               <li key={etape.title} className="rounded-xl border border-ink-200 bg-white p-6">
-                <p className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 text-sm font-black text-white">
+                <p className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 text-sm font-black text-ink-950">
                   {index + 1}
                 </p>
                 <h3 className="mt-4 font-bold text-ink-900">{etape.title}</h3>
@@ -352,7 +352,7 @@ export default function HomePage() {
               href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg bg-leaf-500 px-6 py-3.5 text-center font-bold text-white transition hover:bg-leaf-600"
+              className="rounded-lg bg-leaf-500 px-6 py-3.5 text-center font-bold text-ink-950 transition hover:bg-leaf-600"
             >
               Écrire sur WhatsApp
             </a>

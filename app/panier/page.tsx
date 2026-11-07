@@ -19,7 +19,7 @@ export default function PanierPage() {
           </p>
           <Link
             href="/prestations"
-            className="mt-8 inline-block rounded-lg bg-brand-500 px-6 py-3 font-bold text-white transition hover:bg-brand-600"
+            className="mt-8 inline-block rounded-lg bg-brand-500 px-6 py-3 font-bold text-ink-950 transition hover:bg-brand-600"
           >
             Parcourir le catalogue
           </Link>
@@ -142,7 +142,7 @@ export default function PanierPage() {
             </p>
             <Link
               href="/devis"
-              className="mt-5 block rounded-lg bg-leaf-500 px-6 py-3 text-center font-bold text-white transition hover:bg-leaf-600"
+              className="mt-5 block rounded-lg bg-leaf-500 px-6 py-3 text-center font-bold text-ink-950 transition hover:bg-leaf-600"
             >
               Étape 2 — envoyer le devis
             </Link>

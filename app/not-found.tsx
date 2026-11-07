@@ -15,7 +15,7 @@ export default function NotFound() {
           depuis le catalogue, l&apos;atelier et les conseils de l&apos;équipe.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/prestations" className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-white transition hover:bg-brand-600">
+          <Link href="/prestations" className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-ink-950 transition hover:bg-brand-600">
             Voir nos prestations
           </Link>
           <Link href="/devis" className="rounded-lg bg-ink-950 px-6 py-3 font-bold text-white transition hover:bg-ink-800">

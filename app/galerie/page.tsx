@@ -32,7 +32,7 @@ export default function GaleriePage() {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/devis"
-            className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-white transition hover:bg-brand-600"
+            className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-ink-950 transition hover:bg-brand-600"
           >
             Demander un devis
           </Link>

@@ -78,7 +78,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
           <button
             type="button"
             onClick={() => this.setState({ hasError: false, error: null })}
-            className="mt-2 rounded-lg bg-brand-500 px-5 py-2.5 font-bold text-white transition hover:bg-brand-600"
+            className="mt-2 rounded-lg bg-brand-500 px-5 py-2.5 font-bold text-ink-950 transition hover:bg-brand-600"
           >
             Réessayer
           </button>

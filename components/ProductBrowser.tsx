@@ -251,7 +251,7 @@ export default function ProductBrowser() {
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Link
                   href="/prestations"
-                  className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-white transition hover:bg-brand-600"
+                  className="rounded-lg bg-brand-500 px-6 py-3 font-bold text-ink-950 transition hover:bg-brand-600"
                 >
                   Voir tout le catalogue
                 </Link>
@@ -430,7 +430,7 @@ function QuickView({ product, onClose }: { product: Product | null; onClose: () 
                     addToCart(product, 1, defaultSelections(product));
                     setAdded(true);
                   }}
-                  className="rounded-lg bg-leaf-500 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-leaf-600"
+                  className="rounded-lg bg-leaf-500 px-5 py-2.5 text-sm font-bold text-ink-950 transition hover:bg-leaf-600"
                 >
                   {added ? "Ajouté ✓" : "Ajouter à ma demande"}
                 </button>
