@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-ink-800 px-4 py-5 text-center text-xs text-ink-500">
+      <div className="border-t border-ink-800 px-4 py-5 text-center text-xs text-ink-400">
         © {siteConfig.name} — Dakar, Sénégal. Tous droits réservés.
       </div>
     </footer>

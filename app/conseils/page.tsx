@@ -35,7 +35,7 @@ export default function ConseilsPage() {
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">Le coin atelier</p>
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-700">Le coin atelier</p>
         <h1 className="mt-2 text-3xl font-black text-ink-900 sm:text-4xl">
           Des repères avant de commander
         </h1>
@@ -51,12 +51,12 @@ export default function ConseilsPage() {
                 href={`/conseils/${article.slug}`}
                 className="flex h-full flex-col rounded-xl border border-ink-200 bg-white p-6 transition hover:border-brand-400 hover:shadow-md"
               >
-                <p className="text-xs font-black uppercase tracking-widest text-brand-600">
+                <p className="text-xs font-black uppercase tracking-widest text-brand-700">
                   {article.category}
                 </p>
                 <h2 className="mt-3 text-lg font-bold text-ink-900">{article.title}</h2>
                 <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">{article.excerpt}</p>
-                <p className="mt-4 text-xs text-ink-400">
+                <p className="mt-4 text-xs text-ink-500">
                   {article.minutes} min de lecture · mis à jour le {formatDate(article.updated)}
                 </p>
               </Link>

@@ -38,7 +38,7 @@ export default function ContactPage() {
     <div className="bg-ink-50 py-14">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[.85fr_1.15fr] lg:px-8">
         <section>
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-500">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-700">
             Contact
           </p>
           <h1 className="mt-3 text-4xl font-black text-ink-950">
@@ -58,7 +58,7 @@ export default function ContactPage() {
                 className="rounded-xl bg-white p-4 shadow-sm ring-1 ring-ink-200 transition hover:ring-brand-300"
               >
                 <p className="font-bold text-ink-950">{canal.label}</p>
-                <p className="mt-1 text-brand-600">{canal.value}</p>
+                <p className="mt-1 text-brand-700">{canal.value}</p>
                 <p className="mt-1 text-sm text-ink-500">{canal.note}</p>
               </a>
             ))}
@@ -66,11 +66,11 @@ export default function ContactPage() {
 
           <p className="mt-8 text-sm leading-6 text-ink-600">
             Vous voulez d&apos;abord comparer les supports&nbsp;?{" "}
-            <Link href="/prestations" className="font-bold text-brand-600 hover:text-brand-700">
+            <Link href="/prestations" className="font-bold text-brand-700 hover:text-primary-800">
               Voir le catalogue
             </Link>{" "}
             ou{" "}
-            <Link href="/conseils" className="font-bold text-brand-600 hover:text-brand-700">
+            <Link href="/conseils" className="font-bold text-brand-700 hover:text-primary-800">
               lire nos conseils
             </Link>
             .

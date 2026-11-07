@@ -33,7 +33,7 @@ export default function PanierPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-700">
               Étape 1 sur 2
             </p>
             <h1 className="mt-2 text-3xl font-black text-ink-900">Ma demande de devis</h1>
@@ -71,7 +71,7 @@ export default function PanierPage() {
                   <h2 className="font-bold text-ink-900">
                     <Link
                       href={`/prestations/${item.product.id}`}
-                      className="transition hover:text-brand-600"
+                      className="transition hover:text-primary-800"
                     >
                       {item.product.name}
                     </Link>
@@ -148,7 +148,7 @@ export default function PanierPage() {
             </Link>
             <Link
               href="/prestations"
-              className="mt-3 block text-center text-sm font-semibold text-brand-600 hover:text-brand-700"
+              className="mt-3 block text-center text-sm font-semibold text-brand-700 hover:text-primary-800"
             >
               Ajouter une autre prestation
             </Link>

@@ -131,7 +131,7 @@ export default async function ArticlePage({ params }: Props) {
       <nav aria-label="Fil d’Ariane" className="border-b border-ink-200 bg-ink-50">
         <ol className="mx-auto flex max-w-4xl flex-wrap items-center gap-2 px-4 py-3 text-sm sm:px-6">
           <li>
-            <Link href="/" className="text-ink-500 hover:text-brand-600">
+            <Link href="/" className="text-ink-500 hover:text-primary-800">
               Accueil
             </Link>
           </li>
@@ -139,7 +139,7 @@ export default async function ArticlePage({ params }: Props) {
             /
           </li>
           <li>
-            <Link href="/conseils" className="text-ink-500 hover:text-brand-600">
+            <Link href="/conseils" className="text-ink-500 hover:text-primary-800">
               Conseils
             </Link>
           </li>
@@ -153,14 +153,14 @@ export default async function ArticlePage({ params }: Props) {
       </nav>
 
       <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-700">
           {article.category}
         </p>
         <h1 className="mt-3 text-3xl font-black leading-tight text-ink-900 sm:text-4xl">
           {article.title}
         </h1>
         <p className="mt-4 text-lg leading-8 text-ink-600">{article.excerpt}</p>
-        <p className="mt-4 text-sm text-ink-400">
+        <p className="mt-4 text-sm text-ink-500">
           Atelier PIXEL PRESS · {article.minutes} min · mis à jour le {formatDate(article.updated)}
         </p>
 
@@ -219,7 +219,7 @@ export default async function ArticlePage({ params }: Props) {
                   href={`/conseils/${item.slug}`}
                   className="block h-full rounded-xl border border-ink-200 bg-white p-5 transition hover:border-brand-400"
                 >
-                  <p className="text-xs font-black uppercase tracking-widest text-brand-600">
+                  <p className="text-xs font-black uppercase tracking-widest text-brand-700">
                     {item.category}
                   </p>
                   <p className="mt-2 font-bold leading-6 text-ink-900">{item.title}</p>

@@ -99,7 +99,7 @@ export default async function PrestationPage({ params }: Props) {
       <nav aria-label="Fil d’Ariane" className="border-b border-ink-200 bg-ink-50">
         <ol className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-4 py-3 text-sm sm:px-6 lg:px-8">
           <li>
-            <Link href="/" className="text-ink-500 hover:text-brand-600">
+            <Link href="/" className="text-ink-500 hover:text-primary-800">
               Accueil
             </Link>
           </li>
@@ -107,7 +107,7 @@ export default async function PrestationPage({ params }: Props) {
             /
           </li>
           <li>
-            <Link href="/prestations" className="text-ink-500 hover:text-brand-600">
+            <Link href="/prestations" className="text-ink-500 hover:text-primary-800">
               Prestations
             </Link>
           </li>
@@ -119,7 +119,7 @@ export default async function PrestationPage({ params }: Props) {
               <li>
                 <Link
                   href={`/prestations?category=${category.slug}`}
-                  className="text-ink-500 hover:text-brand-600"
+                  className="text-ink-500 hover:text-primary-800"
                 >
                   {category.name}
                 </Link>
@@ -152,7 +152,7 @@ export default async function PrestationPage({ params }: Props) {
             <dl className="mt-6 grid grid-cols-1 gap-4 rounded-xl border border-ink-200 bg-ink-50 p-5 sm:grid-cols-3">
               {product.specs.map((spec) => (
                 <div key={spec.label}>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink-400">
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink-500">
                     {spec.label}
                   </dt>
                   <dd className="mt-1 text-sm font-medium text-ink-800">{spec.value}</dd>
@@ -162,7 +162,7 @@ export default async function PrestationPage({ params }: Props) {
           </div>
 
           <div className="lg:col-span-5">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-700">
               {categoryName(product.category)}
             </p>
             <h1 className="mt-2 text-3xl font-black text-ink-900 sm:text-4xl">{product.name}</h1>
@@ -205,7 +205,7 @@ export default async function PrestationPage({ params }: Props) {
               },
             ].map((step, index) => (
               <li key={step.title} className="rounded-xl border border-ink-200 bg-white p-5">
-                <p className="text-xs font-black uppercase tracking-widest text-brand-600">
+                <p className="text-xs font-black uppercase tracking-widest text-brand-700">
                   Étape {index + 1}
                 </p>
                 <h3 className="mt-2 font-bold text-ink-900">{step.title}</h3>
@@ -225,7 +225,7 @@ export default async function PrestationPage({ params }: Props) {
               </h2>
               <Link
                 href={`/prestations?category=${product.category}`}
-                className="text-sm font-bold text-brand-600 hover:text-brand-700"
+                className="text-sm font-bold text-brand-700 hover:text-primary-800"
               >
                 Toute la catégorie →
               </Link>

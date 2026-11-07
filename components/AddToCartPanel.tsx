@@ -111,7 +111,7 @@ export default function AddToCartPanel({ product }: { product: Product }) {
       <p className="text-xs leading-5 text-ink-500">
         Le tarif affiché est un point de départ : la quantité, les finitions et le délai sont
         confirmés au devis.{" "}
-        <Link href="/panier" className="font-semibold text-brand-600 hover:text-brand-700">
+        <Link href="/panier" className="font-semibold text-brand-700 hover:text-primary-800">
           Voir ma demande
         </Link>
       </p>

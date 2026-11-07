@@ -55,7 +55,7 @@ function CategoryMegaMenu({ open, onToggle }: { open: boolean; onToggle: () => v
         className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition ${
           active
             ? "bg-brand-50 text-brand-700"
-            : "text-slate-700 hover:bg-slate-100 hover:text-brand-600"
+            : "text-slate-700 hover:bg-slate-100 hover:text-primary-800"
         }`}
       >
         Catalogue
@@ -89,7 +89,7 @@ function CategoryMegaMenu({ open, onToggle }: { open: boolean; onToggle: () => v
             <Link
               href="/prestations"
               onClick={onToggle}
-              className="text-sm font-bold text-brand-600 transition hover:text-brand-700"
+              className="text-sm font-bold text-brand-700 transition hover:text-primary-800"
             >
               Tout le catalogue&nbsp;→
             </Link>
@@ -113,7 +113,7 @@ function CategoryMegaMenu({ open, onToggle }: { open: boolean; onToggle: () => v
                   />
                 </span>
                 <span>
-                  <span className="block text-sm font-bold text-slate-900 group-hover:text-brand-600">
+                  <span className="block text-sm font-bold text-slate-900 group-hover:text-primary-800">
                     {category.name}
                   </span>
                   <span className="mt-0.5 block text-xs leading-5 text-slate-500">
@@ -134,7 +134,7 @@ function CategoryMegaMenu({ open, onToggle }: { open: boolean; onToggle: () => v
                   key={product.id}
                   href={`/prestations/${product.id}`}
                   onClick={onToggle}
-                  className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600"
+                  className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700 transition hover:border-brand-400 hover:text-primary-800"
                 >
                   {product.name}
                 </Link>
@@ -164,7 +164,7 @@ export default function Header() {
     `rounded-lg px-3 py-2 text-sm font-semibold transition ${
       isActive(href)
         ? "bg-brand-50 text-brand-700"
-        : "text-slate-700 hover:bg-slate-100 hover:text-brand-600"
+        : "text-slate-700 hover:bg-slate-100 hover:text-primary-800"
     }`;
 
   return (
@@ -222,7 +222,7 @@ export default function Header() {
             <Link
               href="/panier"
               aria-label={`Voir ma demande${totalItems > 0 ? `, ${totalItems} article${totalItems > 1 ? "s" : ""}` : ", vide"}`}
-              className="relative rounded-lg p-2 text-slate-700 transition hover:bg-slate-100 hover:text-brand-600"
+              className="relative rounded-lg p-2 text-slate-700 transition hover:bg-slate-100 hover:text-primary-800"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6 fill-none stroke-current stroke-[1.6]">
                 <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.2" strokeLinecap="round" strokeLinejoin="round" />

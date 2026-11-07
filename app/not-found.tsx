@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div className="grid min-h-[60vh] place-items-center bg-ink-50 px-4 py-20">
       <div className="max-w-xl text-center">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-500">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-700">
           Erreur 404
         </p>
         <h1 className="mt-3 text-4xl font-black text-ink-950">
@@ -23,9 +23,9 @@ export default function NotFound() {
           </Link>
         </div>
         <nav aria-label="Raccourcis" className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-ink-600">
-          <Link href="/galerie" className="hover:text-brand-600">Nos techniques en images</Link>
-          <Link href="/conseils" className="hover:text-brand-600">Conseils de l&apos;atelier</Link>
-          <Link href="/a-propos" className="hover:text-brand-600">L&apos;atelier</Link>
+          <Link href="/galerie" className="hover:text-primary-800">Nos techniques en images</Link>
+          <Link href="/conseils" className="hover:text-primary-800">Conseils de l&apos;atelier</Link>
+          <Link href="/a-propos" className="hover:text-primary-800">L&apos;atelier</Link>
         </nav>
       </div>
     </div>

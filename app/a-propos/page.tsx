@@ -96,7 +96,7 @@ export default function AProposPage() {
           <ol className="mt-8 grid gap-5 lg:grid-cols-3">
             {regles.map((regle, index) => (
               <li key={regle.title} className="rounded-xl border border-ink-200 bg-white p-6">
-                <p className="text-xs font-black uppercase tracking-widest text-brand-600">
+                <p className="text-xs font-black uppercase tracking-widest text-brand-700">
                   Règle {index + 1}
                 </p>
                 <h3 className="mt-2 text-lg font-bold text-ink-900">{regle.title}</h3>

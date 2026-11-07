@@ -164,11 +164,11 @@ export default function HomePage() {
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="font-bold text-ink-900 group-hover:text-brand-600">
+                    <h3 className="font-bold text-ink-900 group-hover:text-primary-800">
                       {category.name}
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-ink-600">{category.tagline}</p>
-                    <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-ink-400">
+                    <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-ink-500">
                       {countByCategory(category.slug)} prestations
                     </p>
                   </div>
@@ -190,7 +190,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/prestations"
-              className="text-sm font-bold text-brand-600 transition hover:text-brand-700"
+              className="text-sm font-bold text-brand-700 transition hover:text-primary-800"
             >
               Tout le catalogue →
             </Link>
@@ -207,7 +207,7 @@ export default function HomePage() {
                     <h3 className="text-lg font-bold text-ink-900">
                       <Link
                         href={`/prestations/${product.id}`}
-                        className="transition hover:text-brand-600"
+                        className="transition hover:text-primary-800"
                       >
                         {product.name}
                       </Link>
@@ -251,7 +251,7 @@ export default function HomePage() {
             Une date butoir ?{" "}
             <Link
               href="/conseils/delais-realistes-a-dakar"
-              className="font-bold text-brand-600 hover:text-brand-700"
+              className="font-bold text-brand-700 hover:text-primary-800"
             >
               Voici la chronologie réelle d’une commande
             </Link>
@@ -264,7 +264,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <h2 className="text-2xl font-black text-ink-900 sm:text-3xl">Dans l’atelier</h2>
-            <Link href="/galerie" className="text-sm font-bold text-brand-600 transition hover:text-brand-700">
+            <Link href="/galerie" className="text-sm font-bold text-brand-700 transition hover:text-primary-800">
               Toutes les techniques →
             </Link>
           </div>
@@ -304,7 +304,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/conseils"
-              className="text-sm font-bold text-brand-600 transition hover:text-brand-700"
+              className="text-sm font-bold text-brand-700 transition hover:text-primary-800"
             >
               Tous les conseils →
             </Link>
@@ -317,12 +317,12 @@ export default function HomePage() {
                   href={`/conseils/${article.slug}`}
                   className="block h-full rounded-xl border border-ink-200 bg-white p-6 transition hover:border-brand-400 hover:shadow-md"
                 >
-                  <p className="text-xs font-black uppercase tracking-widest text-brand-600">
+                  <p className="text-xs font-black uppercase tracking-widest text-brand-700">
                     {article.category}
                   </p>
                   <h3 className="mt-3 font-bold leading-6 text-ink-900">{article.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-ink-600">{article.excerpt}</p>
-                  <p className="mt-4 text-xs text-ink-400">{article.minutes} min de lecture</p>
+                  <p className="mt-4 text-xs text-ink-500">{article.minutes} min de lecture</p>
                 </Link>
               </li>
             ))}

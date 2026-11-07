@@ -13,7 +13,7 @@ export default function GaleriePage() {
   return (
     <div className="bg-ink-50 py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-700">
           L’atelier en images
         </p>
         <h1 className="mt-2 text-3xl font-black text-ink-900 sm:text-4xl">
@@ -38,7 +38,7 @@ export default function GaleriePage() {
           </Link>
           <Link
             href="/prestations"
-            className="rounded-lg border border-ink-200 bg-white px-6 py-3 font-bold text-ink-900 transition hover:border-brand-400 hover:text-brand-600"
+            className="rounded-lg border border-ink-200 bg-white px-6 py-3 font-bold text-ink-900 transition hover:border-brand-400 hover:text-primary-800"
           >
             Voir le catalogue
           </Link>

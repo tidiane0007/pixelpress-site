@@ -118,7 +118,7 @@ export default function ProductBrowser() {
     <>
       <section className="border-b border-ink-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">Catalogue</p>
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-700">Catalogue</p>
           <h1 className="mt-2 text-3xl font-black text-ink-900 sm:text-4xl">
             {category ? category.name : "Toutes nos prestations d’impression"}
           </h1>
@@ -135,7 +135,7 @@ export default function ProductBrowser() {
               className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                 !activeCategory
                   ? "bg-ink-900 text-white"
-                  : "border border-ink-200 text-ink-600 hover:border-brand-400 hover:text-brand-600"
+                  : "border border-ink-200 text-ink-600 hover:border-brand-400 hover:text-primary-800"
               }`}
             >
               Tout ({products.length})
@@ -148,7 +148,7 @@ export default function ProductBrowser() {
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                   activeCategory === item.slug
                     ? "bg-ink-900 text-white"
-                    : "border border-ink-200 text-ink-600 hover:border-brand-400 hover:text-brand-600"
+                    : "border border-ink-200 text-ink-600 hover:border-brand-400 hover:text-primary-800"
                 }`}
               >
                 {item.name}
@@ -193,7 +193,7 @@ export default function ProductBrowser() {
                       >
                         <svg
                           viewBox="0 0 24 24"
-                          className="h-4 w-4 text-ink-400 shrink-0"
+                          className="h-4 w-4 text-ink-500 shrink-0"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -206,7 +206,7 @@ export default function ProductBrowser() {
                           )}
                         </svg>
                         <span>{suggestion.label}</span>
-                        <span className="ml-auto text-xs text-ink-400 capitalize">{suggestion.type}</span>
+                        <span className="ml-auto text-xs text-ink-500 capitalize">{suggestion.type}</span>
                       </Link>
                     </li>
                   ))}
@@ -238,7 +238,7 @@ export default function ProductBrowser() {
           {results.length === 0 ? (
             <div className="mt-16 text-center" role="status" aria-live="polite">
               <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-ink-100 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="h-8 w-8 text-ink-400" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg viewBox="0 0 24 24" className="h-8 w-8 text-ink-500" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <circle cx="11" cy="11" r="8" />
                   <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
                 </svg>
@@ -257,7 +257,7 @@ export default function ProductBrowser() {
                 </Link>
                 <Link
                   href="/devis"
-                  className="rounded-lg border border-ink-200 bg-white px-6 py-3 font-bold text-ink-900 transition hover:border-brand-400 hover:text-brand-600"
+                  className="rounded-lg border border-ink-200 bg-white px-6 py-3 font-bold text-ink-900 transition hover:border-brand-400 hover:text-primary-800"
                 >
                   Demander un devis libre
                 </Link>
@@ -271,7 +271,7 @@ export default function ProductBrowser() {
                     <Link
                       key={term}
                       href={`/prestations?search=${encodeURIComponent(term)}`}
-                      className="mx-1 text-brand-600 hover:text-brand-700 underline underline-offset-2"
+                      className="mx-1 text-brand-700 hover:text-primary-800 underline underline-offset-2"
                     >
                       {term}
                     </Link>
@@ -290,7 +290,7 @@ export default function ProductBrowser() {
                       <h2 className="text-lg font-bold text-ink-900">
                         <Link
                           href={`/prestations/${product.id}`}
-                          className="transition hover:text-brand-600"
+                          className="transition hover:text-primary-800"
                         >
                           {product.name}
                         </Link>
@@ -311,7 +311,7 @@ export default function ProductBrowser() {
                         <svg
                           viewBox="0 0 20 20"
                           aria-hidden="true"
-                          className="mt-0.5 h-4 w-4 shrink-0 fill-none stroke-current stroke-[1.6] text-brand-600"
+                          className="mt-0.5 h-4 w-4 shrink-0 fill-none stroke-current stroke-[1.6] text-brand-700"
                         >
                           <circle cx="10" cy="10" r="7.5" />
                           <path d="M10 6v4.5l3 1.8" strokeLinecap="round" />
@@ -331,7 +331,7 @@ export default function ProductBrowser() {
                         <button
                           type="button"
                           onClick={() => setQuickView(product)}
-                          className="rounded-lg border border-ink-200 px-4 py-2 text-sm font-semibold text-ink-700 transition hover:border-brand-400 hover:text-brand-600"
+                          className="rounded-lg border border-ink-200 px-4 py-2 text-sm font-semibold text-ink-700 transition hover:border-brand-400 hover:text-primary-800"
                         >
                           Aperçu
                         </button>
@@ -397,7 +397,7 @@ function QuickView({ product, onClose }: { product: Product | null; onClose: () 
           </div>
 
           <div className="p-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-brand-600">
+            <p className="text-xs font-bold uppercase tracking-widest text-brand-700">
               {categoryName(product.category)}
             </p>
             <h2 className="mt-1 text-2xl font-black text-ink-900">{product.name}</h2>
@@ -406,7 +406,7 @@ function QuickView({ product, onClose }: { product: Product | null; onClose: () 
             <dl className="mt-5 grid gap-4 sm:grid-cols-3">
               {product.specs.map((spec) => (
                 <div key={spec.label}>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink-400">
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink-500">
                     {spec.label}
                   </dt>
                   <dd className="mt-1 text-sm text-ink-800">{spec.value}</dd>
@@ -437,7 +437,7 @@ function QuickView({ product, onClose }: { product: Product | null; onClose: () 
                 <Link
                   href={`/prestations/${product.id}`}
                   onClick={onClose}
-                  className="rounded-lg border border-ink-200 px-5 py-2.5 text-sm font-bold text-ink-800 transition hover:border-brand-400 hover:text-brand-600"
+                  className="rounded-lg border border-ink-200 px-5 py-2.5 text-sm font-bold text-ink-800 transition hover:border-brand-400 hover:text-primary-800"
                 >
                   Voir la fiche
                 </Link>
