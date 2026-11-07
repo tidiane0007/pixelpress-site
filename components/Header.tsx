@@ -83,7 +83,7 @@ function CategoryMegaMenu({ open, onToggle }: { open: boolean; onToggle: () => v
           className="absolute inset-x-0 top-full z-50 mt-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl"
         >
           <div className="mb-5 flex items-baseline justify-between gap-4 border-b border-slate-100 pb-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+            <p className="text-xs font-semibold uppercase tracking-widest text-ink-500">
               Nos familles de prestations
             </p>
             <Link
@@ -125,7 +125,7 @@ function CategoryMegaMenu({ open, onToggle }: { open: boolean; onToggle: () => v
           </div>
 
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+            <p className="text-xs font-semibold uppercase tracking-widest text-ink-500">
               Les plus demandés
             </p>
             <div className="flex flex-wrap gap-2">
@@ -269,7 +269,7 @@ export default function Header() {
             className="border-t border-slate-200 bg-white px-4 pb-5 pt-3 lg:hidden"
           >
             <ul className="space-y-1 text-sm font-semibold text-slate-800">
-              <li className="px-2 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+              <li className="px-2 pb-1 pt-2 text-xs font-bold uppercase tracking-widest text-ink-500">
                 Catégories
               </li>
               {categories.map((category) => (
