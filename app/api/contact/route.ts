@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { siteConfig } from "@/lib/site-config";
 
 type ContactPayload = {
@@ -56,8 +55,13 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS_PER_WINDOW = 5;
 const attempts = new Map<string, number[]>();
 
-async function isRateLimited() {
-  const forwarded = (await headers()).get("x-forwarded-for");
+/** Mieux qu'un clapet, pas un barrage : la `Map` vit dans l'instance de la fonction.
+    Sur Vercel, chaque région froide repart à zéro et un robot malin qui répartit ses
+    requêtes n'est jamais compté ensemble. Ce qui écarte vraiment le spam, c'est le
+    honeypot et le contrôle d'origine ci-dessous ; celui-ci ne fait que ralentir
+    l'élève qui martèle le même bouton depuis le même téléphone. */
+async function isRateLimited(request: Request) {
+  const forwarded = request.headers.get("x-forwarded-for");
   const ip = forwarded?.split(",")[0]?.trim() || "inconnu";
   const now = Date.now();
   const recent = (attempts.get(ip) ?? []).filter((at) => now - at < WINDOW_MS);
@@ -66,20 +70,61 @@ async function isRateLimited() {
   return recent.length > MAX_REQUESTS_PER_WINDOW;
 }
 
+/** Un POST qui ne vient pas d'une page de ce site n'a aucune raison d'être traité :
+    ce sont les formulaires copiés-collés et les robots qui tapent l'URL en direct.
+    Absence d'en-tête = on laisse passer, `curl` et certains navigateurs en mode strict
+    n'en envoient pas — le honeypot reste le premier filtre. */
+function sameOrigin(request: Request) {
+  const brut = request.headers.get("origin") ?? request.headers.get("referer");
+  if (!brut) return true;
+  try {
+    return new URL(brut).host === request.headers.get("host");
+  } catch {
+    return false;
+  }
+}
+
+/** Une ligne par demande, pour que la question « est-ce que le formulaire travaille ? »
+    ait une réponse même sans e-mail. Rien d'identifiant dedans : ni nom, ni adresse, ni
+    message. Les journaux d'un hébergeur sont lisibles par tout le projet et survivent au
+    dépôt, contrairement à la messagerie d'un particulier. */
+function journaliser(issue: string, payload: ContactPayload) {
+  console.log(JSON.stringify({
+    evt: "contact",
+    issue,
+    robot: !isHoneypotEmpty(payload.website),
+    lignes: Array.isArray(payload.items) ? payload.items.length : 0,
+  }));
+}
+
 export async function POST(request: Request) {
+  if (!sameOrigin(request)) {
+    journaliser("origine", {});
+    return Response.json({ message: "Requête rejetée : envoyez votre demande depuis le site." }, { status: 403 });
+  }
+
   let payload: ContactPayload;
-  try { payload = await request.json(); } catch { return Response.json({ message: "Données de formulaire invalides." }, { status: 400 }); }
+  try { payload = await request.json(); } catch {
+    journaliser("corps invalide", {});
+    return Response.json({ message: "Données de formulaire invalides." }, { status: 400 });
+  }
 
   // Un robot qui remplit le champ dissimulé est écarté sans lui révéler qu'il a été détecté.
-  if (!isHoneypotEmpty(payload.website)) return Response.json({ message: "Message envoyé." }, { status: 200 });
+  if (!isHoneypotEmpty(payload.website)) {
+    journaliser("honeypot", payload);
+    return Response.json({ message: "Message envoyé." }, { status: 200 });
+  }
 
   if (!hasValidFields(payload)) {
+    journaliser("champs", payload);
     return Response.json({ message: "Veuillez remplir tous les champs correctement." }, { status: 400 });
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) {
+    journaliser("email", payload);
     return Response.json({ message: "Veuillez saisir une adresse e-mail valide." }, { status: 400 });
   }
-  if (await isRateLimited()) {
+  if (await isRateLimited(request)) {
+    journaliser("limiteur", payload);
     return Response.json({ message: "Trop de demandes d'affilée. Patientez une minute ou écrivez-nous sur WhatsApp." }, { status: 429 });
   }
 
@@ -109,6 +154,7 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
   if (!apiKey || !from) {
+    journaliser("503 sans clé", payload);
     return Response.json({ message: "Le service d'e-mail n'est pas encore configuré. Envoyez votre demande sur WhatsApp." }, { status: 503 });
   }
 
@@ -118,8 +164,10 @@ export async function POST(request: Request) {
     body: JSON.stringify({ from, to: [siteConfig.email], reply_to: payload.email.trim(), subject: `[PIXEL PRESS] ${payload.subject.trim()}`, text: emailText }),
   });
   if (!response.ok) {
+    journaliser("502 resend", payload);
     console.error("Resend contact-form error", await response.text());
     return Response.json({ message: "Le message n'a pas pu être envoyé. Réessayez ou contactez-nous sur WhatsApp." }, { status: 502 });
   }
+  journaliser("envoyé", payload);
   return Response.json({ message: "Message envoyé." }, { status: 200 });
 }
