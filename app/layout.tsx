@@ -67,6 +67,7 @@ const localBusiness = {
   description: siteConfig.description,
   address: {
     "@type": "PostalAddress",
+    addressNeighborhood: "Sodida",
     addressLocality: "Dakar",
     addressCountry: siteConfig.country,
   },

@@ -36,6 +36,9 @@ export default function Footer() {
             <a href={`mailto:${siteConfig.email}`} className="text-ink-400 transition-colors hover:text-white">
               {siteConfig.email}
             </a>
+            {/* Pas d'adresse rue par rue ni d'horaires : nous ne les avons pas. Le
+                quartier vient de lui, le reste se demandera à l'atelier. */}
+            <p className="text-sm text-ink-400">Atelier à Sodida, Dakar</p>
           </div>
         </div>
 
@@ -80,7 +83,7 @@ export default function Footer() {
             href={siteConfig.whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-5 inline-block rounded-lg bg-leaf-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-leaf-600"
+            className="mt-5 inline-block rounded-lg bg-leaf-500 px-5 py-3 text-sm font-bold text-ink-950 transition hover:bg-leaf-600"
           >
             WhatsApp
           </a>
