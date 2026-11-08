@@ -197,8 +197,8 @@ export default function Header() {
             <Image
               src="/pixel-press-logo.png"
               alt="PIXEL PRESS"
-              width={200}
-              height={50}
+              width={170}
+              height={51}
               priority
               className="rounded bg-ink-950 p-1"
             />

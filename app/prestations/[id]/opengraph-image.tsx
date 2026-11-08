@@ -37,7 +37,7 @@ export default async function Image({ params }: Props) {
             <img
               src={logo}
               alt=""
-              style={{ width: 244, height: 61, objectFit: "contain" }}
+              style={{ width: 204, height: 61, objectFit: "contain" }}
             />
           ) : (
             <div style={{ fontSize: 28, letterSpacing: 3, display: "block" }}>

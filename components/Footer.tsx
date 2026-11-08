@@ -21,8 +21,8 @@ export default function Footer() {
           <Image
             src="/pixel-press-logo.png"
             alt="PIXEL PRESS"
-            width={216}
-            height={54}
+            width={200}
+            height={60}
             className="rounded-lg bg-white/95 p-2"
           />
           <p className="mt-4 max-w-xs text-sm leading-6 text-ink-400">

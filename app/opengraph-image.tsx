@@ -32,7 +32,7 @@ export default function Image() {
             <img
               src={logo}
               alt=""
-              style={{ width: 288, height: 72, objectFit: "contain" }}
+              style={{ width: 242, height: 72, objectFit: "contain" }}
             />
           ) : (
             <div style={{ fontSize: 34, letterSpacing: 3, display: "block" }}>
