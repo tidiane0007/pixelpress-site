@@ -106,7 +106,7 @@ export const products: Product[] = [
     price: 25000,
     priceUnit: "les 500 exemplaires A5",
     image: "/images/flyers-depliants.jpg",
-    imageAlt: "Trois flyers aux visuels géométriques vert et orange",
+    imageAlt: "Une pile de flyers et un dépliant plié debout, à visuels géométriques vert et orange",
     category: "papier",
     options: [
       { label: "Format", values: ["A6", "A5", "A4", "Carré 21 × 21"] },
@@ -156,7 +156,7 @@ export const products: Product[] = [
     price: 8000,
     priceUnit: "la planche de 20 pièces",
     image: "/images/stickers.jpg",
-    imageAlt: "Planche d'autocollants découpés à motif géométrique vert et orange",
+    imageAlt: "Planche d’autocollants découpés à motif géométrique vert et orange, l’un d’eux décollé",
     category: "papier",
     options: [
       { label: "Usage", values: ["Intérieur", "Extérieur 3 ans", "Vitrine translucide"] },
@@ -180,7 +180,7 @@ export const products: Product[] = [
     price: 2500,
     priceUnit: "l'unité, à partir de 50 carnets",
     image: "/images/carnet.jpg",
-    imageAlt: "Deux carnets à couverture verte et motif orange",
+    imageAlt: "Carnet à couverture crème, dos en toile verte et petit motif embossé",
     category: "papier",
     options: [
       { label: "Format", values: ["A6 de poche", "A5", "A4"] },
@@ -204,7 +204,7 @@ export const products: Product[] = [
     price: 3500,
     priceUnit: "l'unité, à partir de 12 mugs",
     image: "/images/mug.jpg",
-    imageAlt: "Deux mugs blancs, l'un à intérieur vert, l'autre à intérieur orange",
+    imageAlt: "Mug blanc à intérieur orange, imprimé de formes géométriques vert et orange",
     category: "objets",
     options: [
       { label: "Contenance", values: ["11 cl espresso", "33 cl standard", "50 cl latto"] },
@@ -229,7 +229,7 @@ export const products: Product[] = [
     price: 4000,
     priceUnit: "l'unité, à partir de 20 gourdes",
     image: "/images/gourde.jpg",
-    imageAlt: "Quatre gourdes en aluminium, blanc, vert, orange et gris",
+    imageAlt: "Gourde blanche à bouchon vert et thermos orange posés côte à côte",
     category: "objets",
     options: [
       { label: "Modèle", values: ["Simple paroi", "Double paroi isotherme", "Thermos"] },
@@ -253,7 +253,7 @@ export const products: Product[] = [
     price: 18000,
     priceUnit: "la pièce, à partir de 10 trophées",
     image: "/images/trophee-verre.jpg",
-    imageAlt: "Trois trophées de verre gravés de motifs verts et orange, montés sur socle cristal",
+    imageAlt: "Trophée en verre transparent à motif géométrique vert et orange sur socle aluminium",
     category: "objets",
     options: [
       { label: "Forme", values: ["Hexagone", "Écu", "Octogone", "Losange", "Forme libre"] },
@@ -279,7 +279,7 @@ export const products: Product[] = [
     price: 1200,
     priceUnit: "l'unité, à partir de 50 pièces",
     image: "/images/porte-cles.jpg",
-    imageAlt: "Cinq porte-clés en métal à motifs verts et orange posés près d'un étui noir",
+    imageAlt: "Trois porte-clés en plexiglass découpés à motifs vert et orange, anneaux en métal",
     category: "objets",
     options: [
       { label: "Forme", values: ["Rond", "Cœur", "Rectangle", "Médiateur", "Forme libre"] },
@@ -304,7 +304,7 @@ export const products: Product[] = [
     price: 3500,
     priceUnit: "l'unité, à partir de 12 coques",
     image: "/images/coque-telephone.jpg",
-    imageAlt: "Trois coques de téléphone blanches imprimées de motifs verts et orange",
+    imageAlt: "Coque de téléphone blanche imprimée de formes géométriques vert et orange",
     category: "objets",
     options: [
       { label: "Type", values: ["Rigide", "Souple", "Verre trempé"] },
@@ -329,7 +329,7 @@ export const products: Product[] = [
     price: 900,
     priceUnit: "l'unité, à partir de 100 éventails",
     image: "/images/eventail.jpg",
-    imageAlt: "Trois éventails à main blancs imprimés de motifs verts et orange",
+    imageAlt: "Éventail ouvert à motifs géométriques vert et orange, posé près d’un éventail fermé",
     category: "objets",
     options: [
       { label: "Support", values: ["Carton 300 g", "Plastique", "Bois"] },
@@ -354,7 +354,7 @@ export const products: Product[] = [
     price: 3000,
     priceUnit: "l'unité, à partir de 15 pièces",
     image: "/images/casquette.jpg",
-    imageAlt: "Casquette verte avec un motif brodé orange",
+    imageAlt: "Casquette blanche brodée d’un motif géométrique vert et orange",
     category: "textile",
     options: [
       { label: "Modèle", values: ["6 pans", "Panneau unique", "Bonnet"] },
@@ -427,7 +427,7 @@ export const products: Product[] = [
     price: 30000,
     priceUnit: "les 5 m² posés",
     image: "/images/baches-affiches.jpg",
-    imageAlt: "Affiche grand format à motif géométrique vert et orange",
+    imageAlt: "Bâche PVC roulée avec œillets métalliques et affiche grand format appuyée au mur",
     category: "grand-format",
     options: [
       { label: "Support", values: ["Bâche 510 g", "Bâche mesh", "Intissé", "Affiche vinyle"] },
@@ -451,7 +451,7 @@ export const products: Product[] = [
     price: 55000,
     priceUnit: "le panneau 100 × 70 cm posé",
     image: "/images/panneau-dibond.jpg",
-    imageAlt: "Deux panneaux rigides imprimés, vert et orange",
+    imageAlt: "Panneau composite blanc imprimé de formes géométriques vert et orange, appuyé au mur",
     category: "grand-format",
     options: [
       { label: "Épaisseur", values: ["3 mm intérieur", "4 mm extérieur"] },

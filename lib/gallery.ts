@@ -39,7 +39,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "broderie",
     image: "/images/casquette.jpg",
-    alt: "Casquette verte brodée d’un motif géométrique orange",
+    alt: "Casquette blanche brodée d’un motif géométrique vert et orange",
     title: "Broderie de logo",
     category: "textile",
     spec: "Fil polyester 1 000 points maxi, sur casquette, polaire et chemise.",
@@ -48,7 +48,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "quadri-volailles",
     image: "/images/flyers-depliants.jpg",
-    alt: "Trois flyers quadri aux visuels géométriques vert et orange",
+    alt: "Une pile de flyers et un dépliant plié debout, à visuels géométriques vert et orange",
     title: "Quadri numérique haute densité",
     category: "papier",
     spec: "De 100 à 5 000 exemplaires, pliage et massicot dans l’atelier.",
@@ -66,7 +66,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "decoupe-adhésifs",
     image: "/images/stickers.jpg",
-    alt: "Planche d’autocollants découpés à motif géométrique vert et orange",
+    alt: "Planche d’autocollants découpés à motif géométrique vert et orange, l’un d’eux décollé",
     title: "Découpe à la forme",
     category: "papier",
     spec: "Vinyle blanc, transparent ou repositionnable, contour sur-mesure.",
@@ -75,7 +75,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "reliure-carnets",
     image: "/images/carnet.jpg",
-    alt: "Deux carnets à couverture verte et motif orange",
+    alt: "Carnet à couverture crème, dos en toile verte et petit motif embossé",
     title: "Reliure et dos carré",
     category: "papier",
     spec: "Couverture 300 g pelliculée, 48 à 128 pages, dos collé ou cousu.",
@@ -84,7 +84,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "sublimation-mug",
     image: "/images/mug.jpg",
-    alt: "Deux mugs en céramique, l’un à intérieur vert, l’autre à intérieur orange",
+    alt: "Mug blanc à intérieur orange, imprimé de formes géométriques vert et orange",
     title: "Sublimation sur céramique",
     category: "objets",
     spec: "Encre intégrée à l’émail : aucun relief, lavable au quotidien.",
@@ -93,7 +93,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "marquage-gourde",
     image: "/images/gourde.jpg",
-    alt: "Quatre gourdes en aluminium, blanc, vert, orange et gris",
+    alt: "Gourde blanche à bouchon vert et thermos orange posés côte à côte",
     title: "Marquage d’objets techniques",
     category: "objets",
     spec: "Tampographie et laser sur surfaces courbes et anodisées.",
@@ -102,7 +102,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "gravure-verre",
     image: "/images/trophee-verre.jpg",
-    alt: "Trois trophées de verre gravés de motifs verts et orange, montés sur socle cristal",
+    alt: "Trophée en verre transparent à motif géométrique vert et orange sur socle aluminium",
     title: "Gravure sur verre et cristal",
     category: "objets",
     spec: "Découpe à la forme, bords polis, socle cristal ou noir laqué.",
@@ -111,7 +111,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "sublimation-metal",
     image: "/images/porte-cles.jpg",
-    alt: "Cinq porte-clés en métal à motifs verts et orange posés près d’un étui noir",
+    alt: "Trois porte-clés en plexiglass découpés à motifs vert et orange, anneaux en métal",
     title: "Sublimation sur métal",
     category: "objets",
     spec: "Nom, téléphone et logo tenus sur la même petite face.",
@@ -120,7 +120,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "impression-coque",
     image: "/images/coque-telephone.jpg",
-    alt: "Trois coques de téléphone blanches imprimées de motifs verts et orange",
+    alt: "Coque de téléphone blanche imprimée de formes géométriques vert et orange",
     title: "Impression sur coque",
     category: "objets",
     spec: "Pleine surface sans relief, découpes contrôlées modèle par modèle.",
@@ -129,7 +129,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "marquage-eventail",
     image: "/images/eventail.jpg",
-    alt: "Trois éventails à main imprimés de motifs verts et orange",
+    alt: "Éventail ouvert à motifs géométriques vert et orange, posé près d’un éventail fermé",
     title: "Marquage d’éventails",
     category: "objets",
     spec: "Grand carton ou plastique, deux faces imprimables, tiges bois.",
@@ -149,7 +149,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "bache-vitree",
     image: "/images/baches-affiches.jpg",
-    alt: "Affiche grand format à motif géométrique vert et orange",
+    alt: "Bâche PVC roulée avec œillets métalliques et affiche grand format appuyée au mur",
     title: "Grand format et œillets",
     category: "grand-format",
     spec: "Laize jusqu’à 3,20 m, ourlets, œillets tous les 50 cm.",
@@ -158,7 +158,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "dibond-facade",
     image: "/images/panneau-dibond.jpg",
-    alt: "Deux panneaux composites imprimés vert et orange posés au sol",
+    alt: "Panneau composite blanc imprimé de formes géométriques vert et orange, appuyé au mur",
     title: "Panneaux rigides en façade",
     category: "grand-format",
     spec: "Composite 3 et 4 mm, lamination anti-UV, pose à Dakar et Thiès.",
